@@ -10,10 +10,10 @@ package com.sss.wc.enums;
  * @author buddh
  */
 public enum Privilege {
-    Add_Patient,
-    Search_patients,
-    Edit_Patient,
-    Delete_Patient,
+    Manage_Employee,
+    Manage_Leave,
+    View_Individual_Reports,
+    View_All_Reports,
     Manage_User,
     Manage_Institutions,
     Manage_Departments,

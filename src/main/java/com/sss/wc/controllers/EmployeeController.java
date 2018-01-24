@@ -21,7 +21,7 @@ import javax.faces.convert.Converter;
 import javax.faces.convert.FacesConverter;
 import javax.inject.Inject;
 
-@Named("patientController")
+@Named
 @SessionScoped
 public class EmployeeController implements Serializable {
 
@@ -47,7 +47,7 @@ public class EmployeeController implements Serializable {
     
     
     
-    public String toAddNewPatient() {
+    public String toAddNewEmployee() {
         selected = new Employee();
         selected.setDateOfTransferToCurrentStation(new Date());
         System.out.println("webUserController.loggedUser = " + getWebUserController().getLoggedUser());
@@ -58,7 +58,7 @@ public class EmployeeController implements Serializable {
         }
         System.out.println("selected.getRegisteredInstitute()"
                 + "= " + selected.getRegisteredInstitute());
-        return "/patient/patient";
+        return "/employee/employee";
     }
 
     public String savePatient() {
@@ -73,6 +73,7 @@ public class EmployeeController implements Serializable {
             getFacade().edit(selected);
             JsfUtil.addSuccessMessage("Updated");
         }
+        selected = null;
         return "";
     }
 
@@ -175,7 +176,7 @@ public class EmployeeController implements Serializable {
                 return null;
             }
             EmployeeController controller = (EmployeeController) facesContext.getApplication().getELResolver().
-                    getValue(facesContext.getELContext(), null, "patientController");
+                    getValue(facesContext.getELContext(), null, "employeeController");
             return controller.getPatient(getKey(value));
         }
 

@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://java.sun.com/jsf/facelets"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:f="http://java.sun.com/jsf/core"
+      xmlns:p="http://primefaces.org/ui">
+
+    <ui:composition>
+
+        <p:dialog id="EmployeeLeaveEditDlg" widgetVar="EmployeeLeaveEditDialog" modal="true" resizable="false" appendTo="@(body)" header="#{bundleLeave.EditEmployeeLeaveTitle}">
+            <h:form id="EmployeeLeaveEditForm">
+                <h:panelGroup id="display">
+                    <p:panelGrid columns="2" rendered="#{employeeLeaveController.selected != null}">
+                        <p:outputLabel value="#{bundleLeave.EditEmployeeLeaveLabel_id}" for="id" />
+                        <p:inputText id="id" value="#{employeeLeaveController.selected.id}" title="#{bundleLeave.EditEmployeeLeaveTitle_id}" />
+                        <p:outputLabel value="#{bundleLeave.EditEmployeeLeaveLabel_employee}" for="employee" />
+                        <p:selectOneMenu id="employee" value="#{employeeLeaveController.selected.employee}" >
+                            <f:selectItem itemLabel="#{bundleLeave.SelectOneMessage}"/>
+                            <f:selectItems value="#{employeeController.itemsAvailableSelectOne}"
+                                           var="employeeItem"
+                                           itemValue="#{employeeItem}"/>
+                        </p:selectOneMenu>
+                        <p:outputLabel value="#{bundleLeave.EditEmployeeLeaveLabel_leaveFrom}" for="leaveFrom" />
+                        <p:calendar id="leaveFrom" pattern="MM/dd/yyyy HH:mm:ss" value="#{employeeLeaveController.selected.leaveFrom}" title="#{bundleLeave.EditEmployeeLeaveTitle_leaveFrom}"  showOn="button"/>
+                        <p:outputLabel value="#{bundleLeave.EditEmployeeLeaveLabel_leaveTo}" for="leaveTo" />
+                        <p:calendar id="leaveTo" pattern="MM/dd/yyyy HH:mm:ss" value="#{employeeLeaveController.selected.leaveTo}" title="#{bundleLeave.EditEmployeeLeaveTitle_leaveTo}"  showOn="button"/>
+                        <p:outputLabel value="#{bundleLeave.EditEmployeeLeaveLabel_leaveDays}" for="leaveDays" />
+                        <p:inputText id="leaveDays" value="#{employeeLeaveController.selected.leaveDays}" title="#{bundleLeave.EditEmployeeLeaveTitle_leaveDays}" />
+                        <p:outputLabel value="#{bundleLeave.EditEmployeeLeaveLabel_leaveType}" for="leaveType" />
+                        <p:inputText id="leaveType" value="#{employeeLeaveController.selected.leaveType}" title="#{bundleLeave.EditEmployeeLeaveTitle_leaveType}" />
+                    </p:panelGrid>
+                    <p:commandButton actionListener="#{employeeLeaveController.update}" value="#{bundleLeave.Save}" update="display,:EmployeeLeaveListForm:datalist,:growl" oncomplete="handleSubmit(args, 'EmployeeLeaveEditDialog');"/>
+                    <p:commandButton value="#{bundleLeave.Cancel}" onclick="EmployeeLeaveEditDialog.hide()"/>
+                </h:panelGroup>
+            </h:form>
+        </p:dialog>
+
+    </ui:composition>
+</html>

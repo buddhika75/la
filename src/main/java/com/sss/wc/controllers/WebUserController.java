@@ -130,17 +130,17 @@ public class WebUserController implements Serializable {
 
         UserPrivilege ui1 = new UserPrivilege();
         ui1.setWebUser(selected);
-        ui1.setPrivilege(Privilege.Add_Patient);
+        ui1.setPrivilege(Privilege.Manage_Employee);
         getUserPrivilegeController().createOrUpdate(ui1);
 
 //        UserPrivilege ui2 = new UserPrivilege();
 //        ui2.setWebUser(selected);
-//        ui2.setPrivilege(Privilege.Delete_Patient);
+//        ui2.setPrivilege(Privilege.View_All_Reports);
 //        getUserPrivilegeController().createOrUpdate(ui2);
 
         UserPrivilege ui3 = new UserPrivilege();
         ui3.setWebUser(selected);
-        ui3.setPrivilege(Privilege.Edit_Patient);
+        ui3.setPrivilege(Privilege.View_Individual_Reports);
         getUserPrivilegeController().createOrUpdate(ui3);
 
 //        UserPrivilege ui4 = new UserPrivilege();
@@ -160,7 +160,7 @@ public class WebUserController implements Serializable {
 
         UserPrivilege ui7 = new UserPrivilege();
         ui7.setWebUser(selected);
-        ui7.setPrivilege(Privilege.Search_patients);
+        ui7.setPrivilege(Privilege.Manage_Leave);
         getUserPrivilegeController().createOrUpdate(ui7);
 
 //        UserPrivilege ui8 = new UserPrivilege();
@@ -189,14 +189,14 @@ public class WebUserController implements Serializable {
         }
         loggedUserPrivileges = getUserPrivilegeController().getItems(loggedUser);
 
-        canAddPatient = hasPrivilege(Privilege.Add_Patient);
-        canDelete_Patient = hasPrivilege(Privilege.Delete_Patient);
-        canEdit_Patient = hasPrivilege(Privilege.Edit_Patient);
+        canAddPatient = hasPrivilege(Privilege.Manage_Employee);
+        canDelete_Patient = hasPrivilege(Privilege.View_All_Reports);
+        canEdit_Patient = hasPrivilege(Privilege.View_Individual_Reports);
         canManage_Departments = hasPrivilege(Privilege.Manage_Departments);
         canManage_Institutions = hasPrivilege(Privilege.Manage_Institutions);
         canManage_Items = hasPrivilege(Privilege.Manage_Items);
         canManage_User = hasPrivilege(Privilege.Manage_User);
-        canSearch_patients = hasPrivilege(Privilege.Search_patients);
+        canSearch_patients = hasPrivilege(Privilege.Manage_Leave);
         canSystem_administration = hasPrivilege(Privilege.System_administration);
 
         String jpql;
@@ -433,17 +433,17 @@ public class WebUserController implements Serializable {
 
                 UserPrivilege ui1 = new UserPrivilege();
                 ui1.setWebUser(loggedUser);
-                ui1.setPrivilege(Privilege.Add_Patient);
+                ui1.setPrivilege(Privilege.Manage_Employee);
                 getUserPrivilegeController().createOrUpdate(ui1);
 
                 UserPrivilege ui2 = new UserPrivilege();
                 ui2.setWebUser(loggedUser);
-                ui2.setPrivilege(Privilege.Delete_Patient);
+                ui2.setPrivilege(Privilege.View_All_Reports);
                 getUserPrivilegeController().createOrUpdate(ui2);
 
                 UserPrivilege ui3 = new UserPrivilege();
                 ui3.setWebUser(loggedUser);
-                ui3.setPrivilege(Privilege.Edit_Patient);
+                ui3.setPrivilege(Privilege.View_Individual_Reports);
                 getUserPrivilegeController().createOrUpdate(ui3);
 
                 UserPrivilege ui4 = new UserPrivilege();
@@ -463,7 +463,7 @@ public class WebUserController implements Serializable {
 
                 UserPrivilege ui7 = new UserPrivilege();
                 ui7.setWebUser(loggedUser);
-                ui7.setPrivilege(Privilege.Search_patients);
+                ui7.setPrivilege(Privilege.Manage_Leave);
                 getUserPrivilegeController().createOrUpdate(ui7);
 
                 UserPrivilege ui8 = new UserPrivilege();

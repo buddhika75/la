@@ -40,5 +40,9 @@
             <base-name>/BundleUser2</base-name>
             <var>bundleUser2</var>
         </resource-bundle>
+        <resource-bundle>
+            <base-name>/BundleLeave</base-name>
+            <var>bundleLeave</var>
+        </resource-bundle>
     </application>
 </faces-config>

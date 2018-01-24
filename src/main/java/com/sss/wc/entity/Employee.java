@@ -47,6 +47,11 @@ public class Employee implements Serializable {
     private String nic;
     private Long salaryCode;
     
+    private Boolean active;
+    @Temporal(javax.persistence.TemporalType.DATE)
+    private Date activeFrom;
+    @Temporal(javax.persistence.TemporalType.DATE)
+    private Date activeTo;
     
 
     public Long getId() {
@@ -56,6 +61,9 @@ public class Employee implements Serializable {
     public void setId(Long id) {
         this.id = id;
     }
+    
+    
+    
 
     public Date getDateOfTransferToCurrentStation() {
         return dateOfTransferToCurrentStation;
@@ -180,6 +188,30 @@ public class Employee implements Serializable {
 
     public void setSalaryCode(Long salaryCode) {
         this.salaryCode = salaryCode;
+    }
+
+    public Boolean getActive() {
+        return active;
+    }
+
+    public void setActive(Boolean active) {
+        this.active = active;
+    }
+
+    public Date getActiveFrom() {
+        return activeFrom;
+    }
+
+    public void setActiveFrom(Date activeFrom) {
+        this.activeFrom = activeFrom;
+    }
+
+    public Date getActiveTo() {
+        return activeTo;
+    }
+
+    public void setActiveTo(Date activeTo) {
+        this.activeTo = activeTo;
     }
 
 }

@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://java.sun.com/jsf/facelets"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:f="http://java.sun.com/jsf/core"
+      xmlns:p="http://primefaces.org/ui">
+
+    <ui:composition>
+
+        <p:dialog id="EmployeeLeaveViewDlg" widgetVar="EmployeeLeaveViewDialog" modal="true" resizable="false" appendTo="@(body)" header="#{bundleLeave.ViewEmployeeLeaveTitle}">
+            <h:form id="EmployeeLeaveViewForm">
+                <h:panelGroup id="display">
+                    <p:panelGrid columns="2" rendered="#{employeeLeaveController.selected != null}">
+                        <h:outputText value="#{bundleLeave.ViewEmployeeLeaveLabel_id}"/>
+                        <h:outputText value="#{employeeLeaveController.selected.id}" title="#{bundleLeave.ViewEmployeeLeaveTitle_id}"/>
+                        <h:outputText value="#{bundleLeave.ViewEmployeeLeaveLabel_employee}"/>
+                        <h:outputText value="#{employeeLeaveController.selected.employee}" title="#{bundleLeave.ViewEmployeeLeaveTitle_employee}"/>
+                        <h:outputText value="#{bundleLeave.ViewEmployeeLeaveLabel_leaveFrom}"/>
+                        <h:outputText value="#{employeeLeaveController.selected.leaveFrom}" title="#{bundleLeave.ViewEmployeeLeaveTitle_leaveFrom}">
+                            <f:convertDateTime pattern="MM/dd/yyyy HH:mm:ss" />
+                        </h:outputText>
+                        <h:outputText value="#{bundleLeave.ViewEmployeeLeaveLabel_leaveTo}"/>
+                        <h:outputText value="#{employeeLeaveController.selected.leaveTo}" title="#{bundleLeave.ViewEmployeeLeaveTitle_leaveTo}">
+                            <f:convertDateTime pattern="MM/dd/yyyy HH:mm:ss" />
+                        </h:outputText>
+                        <h:outputText value="#{bundleLeave.ViewEmployeeLeaveLabel_leaveDays}"/>
+                        <h:outputText value="#{employeeLeaveController.selected.leaveDays}" title="#{bundleLeave.ViewEmployeeLeaveTitle_leaveDays}"/>
+                        <h:outputText value="#{bundleLeave.ViewEmployeeLeaveLabel_leaveType}"/>
+                        <h:outputText value="#{employeeLeaveController.selected.leaveType}" title="#{bundleLeave.ViewEmployeeLeaveTitle_leaveType}"/>
+                    </p:panelGrid>
+                    <p:commandButton value="#{bundleLeave.Close}" onclick="EmployeeLeaveViewDialog.hide()"/>
+                </h:panelGroup>
+            </h:form>
+        </p:dialog>
+
+    </ui:composition>
+</html>

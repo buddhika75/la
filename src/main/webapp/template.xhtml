@@ -7,7 +7,7 @@
       xmlns:f="http://java.sun.com/jsf/core">
 
     <h:head>
-        <title><ui:insert name="title">Wound Clinic</ui:insert></title>
+        <title><ui:insert name="title">Leave Analyzer</ui:insert></title>
         <h:outputStylesheet library="css" name="jsfcrud.css"/>
         <h:outputStylesheet library="css" name="main.css" />
         <h:outputScript library="js" name="jsfcrud.js"/>
@@ -21,20 +21,22 @@
 
             <p:growl id="growl" life="3000" autoUpdate="true" />
 
-            <p:layoutUnit position="north" header="Wound Clinic" >
+            <p:layoutUnit position="north" header="Leave Analyzer" >
 
 
                 <h:form id="menuForm"  rendered="#{webUserController.loggedUser ne null}" >
                     <p:menubar>
                         <p:menuitem value="#{bundle.Home}" outcome="/index" icon="ui-icon-home"/>
-                        <p:submenu label="Clinical" >
-                            <p:menuitem value="Search Patients" action="#{patientController.toAddNewPatient()}" ajax="false" />
-                            <p:menuitem value="Add New Patient" action="#{patientController.toAddNewPatient()}" ajax="false" />
-                            <p:menuitem value="Search Visits" action="/mail/all_responses" ajax="false" />
+                        <p:submenu label="Leave" >
+                            <p:menuitem value="Add Employee" action="#{employeeController.toAddNewEmployee()}" ajax="false" />
+                            <p:menuitem value="Manage Employee" action="/employee/List" ajax="false" />
+                            <p:menuitem value="Add Leave" action="#{employeeController.toAddNewEmployee()}" ajax="false" />
+                            <p:menuitem value="Manage Leave" action="#{employeeController.toAddNewEmployee()}" ajax="false" />
                         </p:submenu>
                         <p:submenu label="Reports" >
-                            <p:menuitem value="Analysis" action="/mail/suggestions" ajax="false" />
-                            <p:menuitem value="Patients" action="/patient/List" ajax="false" />
+                            <p:menuitem value="Individual Summery" action="/mail/suggestions" ajax="false" />
+                            <p:menuitem value="Individual Details" action="/patient/List" ajax="false" />
+                            <p:menuitem value="Employee Analysis" action="/patient/List" ajax="false" />
                         </p:submenu>
 
                         <p:submenu label="Users" >

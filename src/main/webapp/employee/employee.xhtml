@@ -1,0 +1,85 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://java.sun.com/jsf/facelets"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:f="http://java.sun.com/jsf/core"
+      xmlns:p="http://primefaces.org/ui">
+
+    <body>
+
+        <ui:composition template="/template.xhtml">
+
+            <ui:define name="title">
+                Patient
+            </ui:define>
+
+            <ui:define name="body">
+
+                <f:view>
+
+
+                    <h:form>
+                        <p:panel  style="margin: auto" >
+                            <f:facet name="header">
+                                <p:outputLabel value="Patient Details" ></p:outputLabel>
+                            </f:facet>
+                            <p:panelGrid columns="2" >
+                                <h:panelGroup >
+                                    <p:panelGrid columns="2" >
+
+                                        <p:outputLabel value="Name:" for="nameOfPatient" />
+                                        <p:inputText required="true" id="nameOfPatient" style="width: 300px;" value="#{employeeController.selected.nameOfEmployee}" title="NameOfPatient" />
+
+
+                                        <p:outputLabel value="NIC:" for="nic" />
+                                        <p:inputText id="nic" value="#{employeeController.selected.nic}" title="ClinicNumber" />
+
+                                        <p:outputLabel value="Salary Code:" for="sc" />
+                                        <p:inputText id="sc" value="#{employeeController.selected.salaryCode}" title="ClinicNumber" />
+
+
+                                        <p:outputLabel value="Gender:" for="gender" />
+                                        <p:selectOneButton id="gender" value="#{employeeController.selected.gender}"  label="Gender" required="true">
+                                            <f:selectItems value="#{enumController.genders}" ></f:selectItems>
+                                        </p:selectOneButton>
+                                        <p:outputLabel value="Date of Birth:" for="dateOfBirth" />
+                                        <p:calendar navigator="true" id="dateOfBirth" pattern="dd MM yyyy" value="#{employeeController.selected.dateOfBirth}" title="DateOfBirth"  >
+                                        </p:calendar>
+
+
+                                        <p:outputLabel value="Contact No.:" for="telephoneNoMobile" />
+                                        <p:inputText id="telephoneNoMobile" value="#{employeeController.selected.contactNumber }" title="TelephoneNoMobile" />
+                                        <p:outputLabel value="Address:" for="address" />
+                                        <p:inputTextarea rows="4" cols="30" id="address" value="#{employeeController.selected.address}" title="Address" />
+
+                                        <p:spacer></p:spacer>
+                                        <p:commandButton ajax="false" action="#{employeeController.savePatient()}" value="Save" ></p:commandButton>
+
+
+                                    </p:panelGrid>
+
+                                </h:panelGroup>
+
+                            </p:panelGrid>
+
+
+
+
+
+
+
+
+
+                        </p:panel>
+                    </h:form>
+                </f:view>
+
+
+
+            </ui:define>
+
+        </ui:composition>
+
+    </body>
+</html>
