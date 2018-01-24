@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://java.sun.com/jsf/facelets"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:f="http://java.sun.com/jsf/core"
+      xmlns:p="http://primefaces.org/ui">
+
+    <ui:composition>
+
+        <p:dialog id="UserInstituteCreateDlg" widgetVar="UserInstituteCreateDialog" modal="true" resizable="false" appendTo="@(body)" header="#{bundleUser2.CreateUserInstituteTitle}">
+            <h:form id="UserInstituteCreateForm">
+                <h:panelGroup id="display">
+                    <p:panelGrid columns="2" rendered="#{userInstituteController.selected != null}">
+                        <p:outputLabel value="#{bundleUser2.CreateUserInstituteLabel_id}" for="id" />
+                        <p:inputText id="id" value="#{userInstituteController.selected.id}" title="#{bundleUser2.CreateUserInstituteTitle_id}" />
+                        <p:outputLabel value="#{bundleUser2.CreateUserInstituteLabel_webUser}" for="webUser" />
+                        <p:selectOneMenu id="webUser" value="#{userInstituteController.selected.webUser}" >
+                            <f:selectItems value="#{webUserController.itemsAvailableSelectOne}"
+                                           var="webUserItem"
+                                           itemValue="#{webUserItem}"/>
+                        </p:selectOneMenu>
+                        <p:outputLabel value="#{bundleUser2.CreateUserInstituteLabel_institute}" for="institute" />
+                        <p:selectOneMenu id="institute" value="#{userInstituteController.selected.institute}" >
+                            <f:selectItems value="#{instituteController.itemsAvailableSelectOne}"
+                                           var="instituteItem"
+                                           itemValue="#{instituteItem}"/>
+                        </p:selectOneMenu>
+                    </p:panelGrid>
+                    <p:commandButton actionListener="#{userInstituteController.create}" value="#{bundleUser2.Save}" update="display,:UserInstituteListForm:datalist,:growl" oncomplete="handleSubmit(args,'UserInstituteCreateDialog');"/>
+                    <p:commandButton value="#{bundleUser2.Cancel}" onclick="UserInstituteCreateDialog.hide()"/>
+                </h:panelGroup>
+            </h:form>
+        </p:dialog>
+
+    </ui:composition>
+</html>

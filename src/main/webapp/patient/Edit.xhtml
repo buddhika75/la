@@ -1,0 +1,97 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://java.sun.com/jsf/facelets"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:f="http://java.sun.com/jsf/core"
+      xmlns:p="http://primefaces.org/ui">
+
+    <ui:composition>
+
+        <p:dialog id="PatientEditDlg" widgetVar="PatientEditDialog" modal="true" resizable="false" appendTo="@(body)" header="#{bundlePt.EditPatientTitle}">
+            <h:form id="PatientEditForm">
+                <h:panelGroup id="display">
+                    <p:panelGrid columns="2" rendered="#{patientController.selected != null}">
+                        <p:outputLabel value="#{bundlePt.EditPatientLabel_id}" for="id" />
+                        <p:inputText id="id" value="#{patientController.selected.id}" title="#{bundlePt.EditPatientTitle_id}" />
+                        <p:outputLabel value="#{bundlePt.EditPatientLabel_registeredInstitute}" for="registeredInstitute" />
+                        <p:selectOneMenu id="registeredInstitute" value="#{patientController.selected.registeredInstitute}" >
+                            <f:selectItem itemLabel="#{bundlePt.SelectOneMessage}"/>
+                            <f:selectItems value="#{instituteController.itemsAvailableSelectOne}"
+                                           var="registeredInstituteItem"
+                                           itemValue="#{registeredInstituteItem}"/>
+                        </p:selectOneMenu>
+                        <p:outputLabel value="#{bundlePt.EditPatientLabel_clinicNumber}" for="clinicNumber" />
+                        <p:inputText id="clinicNumber" value="#{patientController.selected.clinicNumber}" title="#{bundlePt.EditPatientTitle_clinicNumber}" />
+                        <p:outputLabel value="#{bundlePt.EditPatientLabel_dateOfRegistration}" for="dateOfRegistration" />
+                        <p:calendar id="dateOfRegistration" pattern="MM/dd/yyyy" value="#{patientController.selected.dateOfRegistration}" title="#{bundlePt.EditPatientTitle_dateOfRegistration}"  showOn="button"/>
+                        <p:outputLabel value="#{bundlePt.EditPatientLabel_nameOfPatient}" for="nameOfPatient" />
+                        <p:inputText id="nameOfPatient" value="#{patientController.selected.nameOfPatient}" title="#{bundlePt.EditPatientTitle_nameOfPatient}" />
+                        <p:outputLabel value="#{bundlePt.EditPatientLabel_sex}" for="sex" />
+                        <p:inputText id="sex" value="#{patientController.selected.sex}" title="#{bundlePt.EditPatientTitle_sex}" />
+                        <p:outputLabel value="#{bundlePt.EditPatientLabel_dateOfBirth}" for="dateOfBirth" />
+                        <p:calendar id="dateOfBirth" pattern="MM/dd/yyyy" value="#{patientController.selected.dateOfBirth}" title="#{bundlePt.EditPatientTitle_dateOfBirth}"  showOn="button"/>
+                        <p:outputLabel value="#{bundlePt.EditPatientLabel_age}" for="age" />
+                        <p:inputText id="age" value="#{patientController.selected.age}" title="#{bundlePt.EditPatientTitle_age}" />
+                        <p:outputLabel value="#{bundlePt.EditPatientLabel_ageInDays}" for="ageInDays" />
+                        <p:inputText id="ageInDays" value="#{patientController.selected.ageInDays}" title="#{bundlePt.EditPatientTitle_ageInDays}" />
+                        <p:outputLabel value="#{bundlePt.EditPatientLabel_telephoneNoMobile}" for="telephoneNoMobile" />
+                        <p:inputText id="telephoneNoMobile" value="#{patientController.selected.telephoneNoMobile}" title="#{bundlePt.EditPatientTitle_telephoneNoMobile}" />
+                        <p:outputLabel value="#{bundlePt.EditPatientLabel_telephoneNoHome}" for="telephoneNoHome" />
+                        <p:inputText id="telephoneNoHome" value="#{patientController.selected.telephoneNoHome}" title="#{bundlePt.EditPatientTitle_telephoneNoHome}" />
+                        <p:outputLabel value="#{bundlePt.EditPatientLabel_address}" for="address" />
+                        <p:inputTextarea rows="4" cols="30" id="address" value="#{patientController.selected.address}" title="#{bundlePt.EditPatientTitle_address}" />
+                        <p:outputLabel value="#{bundlePt.EditPatientLabel_city}" for="city" />
+                        <p:selectOneMenu id="city" value="#{patientController.selected.city}" >
+                            <f:selectItem itemLabel="#{bundlePt.SelectOneMessage}"/>
+                            <f:selectItems value="#{areaController.itemsAvailableSelectOne}"
+                                           var="cityItem"
+                                           itemValue="#{cityItem}"/>
+                        </p:selectOneMenu>
+                        <p:outputLabel value="#{bundlePt.EditPatientLabel_nic}" for="nic" />
+                        <p:inputText id="nic" value="#{patientController.selected.nic}" title="#{bundlePt.EditPatientTitle_nic}" />
+                        <p:outputLabel value="#{bundlePt.EditPatientLabel_referredBy}" for="referredBy" />
+                        <p:inputText id="referredBy" value="#{patientController.selected.referredBy}" title="#{bundlePt.EditPatientTitle_referredBy}" />
+                        <p:outputLabel value="#{bundlePt.EditPatientLabel_otherReferredBY}" for="otherReferredBY" />
+                        <p:inputText id="otherReferredBY" value="#{patientController.selected.otherReferredBY}" title="#{bundlePt.EditPatientTitle_otherReferredBY}" />
+                        <p:outputLabel value="#{bundlePt.EditPatientLabel_occupation}" for="occupation" />
+                        <p:inputText id="occupation" value="#{patientController.selected.occupation}" title="#{bundlePt.EditPatientTitle_occupation}" />
+                        <p:outputLabel value="#{bundlePt.EditPatientLabel_otherOccupation}" for="otherOccupation" />
+                        <p:inputText id="otherOccupation" value="#{patientController.selected.otherOccupation}" title="#{bundlePt.EditPatientTitle_otherOccupation}" />
+                        <p:outputLabel value="#{bundlePt.EditPatientLabel_race}" for="race" />
+                        <p:inputText id="race" value="#{patientController.selected.race}" title="#{bundlePt.EditPatientTitle_race}" />
+                        <p:outputLabel value="#{bundlePt.EditPatientLabel_raceOther}" for="raceOther" />
+                        <p:inputText id="raceOther" value="#{patientController.selected.raceOther}" title="#{bundlePt.EditPatientTitle_raceOther}" />
+                        <p:outputLabel value="#{bundlePt.EditPatientLabel_disgnosis}" for="disgnosis" />
+                        <p:inputText id="disgnosis" value="#{patientController.selected.disgnosis}" title="#{bundlePt.EditPatientTitle_disgnosis}" />
+                        <p:outputLabel value="#{bundlePt.EditPatientLabel_disgnosisComments}" for="disgnosisComments" />
+                        <p:inputTextarea rows="4" cols="30" id="disgnosisComments" value="#{patientController.selected.disgnosisComments}" title="#{bundlePt.EditPatientTitle_disgnosisComments}" />
+                        <p:outputLabel value="#{bundlePt.EditPatientLabel_otherCtd}" for="otherCtd" />
+                        <p:inputText id="otherCtd" value="#{patientController.selected.otherCtd}" title="#{bundlePt.EditPatientTitle_otherCtd}" />
+                        <p:outputLabel value="#{bundlePt.EditPatientLabel_otherVasculitis}" for="otherVasculitis" />
+                        <p:inputText id="otherVasculitis" value="#{patientController.selected.otherVasculitis}" title="#{bundlePt.EditPatientTitle_otherVasculitis}" />
+                        <p:outputLabel value="#{bundlePt.EditPatientLabel_otherDiagnosis}" for="otherDiagnosis" />
+                        <p:inputText id="otherDiagnosis" value="#{patientController.selected.otherDiagnosis}" title="#{bundlePt.EditPatientTitle_otherDiagnosis}" />
+                        <p:outputLabel value="#{bundlePt.EditPatientLabel_rheumatoidArthritisData}" for="rheumatoidArthritisData" />
+                        <p:selectOneMenu id="rheumatoidArthritisData" value="#{patientController.selected.rheumatoidArthritisData}" >
+                            <f:selectItem itemLabel="#{bundlePt.SelectOneMessage}"/>
+                            <f:selectItems value="#{rheumatoidArthritisDataController.itemsAvailableSelectOne}"
+                                           var="rheumatoidArthritisDataItem"
+                                           itemValue="#{rheumatoidArthritisDataItem}"/>
+                        </p:selectOneMenu>
+                        <p:outputLabel value="#{bundlePt.EditPatientLabel_systemicLupusErythematosusData}" for="systemicLupusErythematosusData" />
+                        <p:selectOneMenu id="systemicLupusErythematosusData" value="#{patientController.selected.systemicLupusErythematosusData}" >
+                            <f:selectItem itemLabel="#{bundlePt.SelectOneMessage}"/>
+                            <f:selectItems value="#{systemicLupusErythematosusDataController.itemsAvailableSelectOne}"
+                                           var="systemicLupusErythematosusDataItem"
+                                           itemValue="#{systemicLupusErythematosusDataItem}"/>
+                        </p:selectOneMenu>
+                    </p:panelGrid>
+                    <p:commandButton actionListener="#{patientController.update}" value="#{bundlePt.Save}" update="display,:PatientListForm:datalist,:growl" oncomplete="handleSubmit(args, 'PatientEditDialog');"/>
+                    <p:commandButton value="#{bundlePt.Cancel}" onclick="PatientEditDialog.hide()"/>
+                </h:panelGroup>
+            </h:form>
+        </p:dialog>
+
+    </ui:composition>
+</html>

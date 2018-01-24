@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://java.sun.com/jsf/facelets"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:f="http://java.sun.com/jsf/core"
+      xmlns:p="http://primefaces.org/ui">
+
+    <ui:composition>
+
+        <p:dialog id="ItemEditDlg" widgetVar="ItemEditDialog" modal="true" resizable="false" appendTo="@(body)" header="#{bundle1.EditItemTitle}">
+            <h:form id="ItemEditForm">
+                <h:panelGroup id="display">
+                    <p:panelGrid columns="2" rendered="#{itemController.selected != null}">
+                        <p:outputLabel value="#{bundle1.EditItemLabel_name}" for="name" />
+                        <p:inputText id="name" value="#{itemController.selected.name}" title="#{bundle1.EditItemTitle_name}" />
+                        <p:outputLabel value="#{bundle1.EditItemLabel_itemCategory}" for="itemCategory" />
+                        <p:selectOneMenu id="itemCategory" 
+                                         value="#{itemController.selected.itemCategory}" 
+                                         title="#{bundle1.CreateItemTitle_itemCategory}" >
+                            <f:selectItems value="#{enumController.itemTypes}" ></f:selectItems>
+                        </p:selectOneMenu>
+                    </p:panelGrid>
+                    <p:commandButton actionListener="#{itemController.update}" value="#{bundle1.Save}" update="display,:ItemListForm:datalist,:growl" oncomplete="handleSubmit(args, 'ItemEditDialog');"/>
+                    <p:commandButton value="#{bundle1.Cancel}" onclick="ItemEditDialog.hide()"/>
+                </h:panelGroup>
+            </h:form>
+        </p:dialog>
+
+    </ui:composition>
+</html>

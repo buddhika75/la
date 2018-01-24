@@ -1,0 +1,43 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://java.sun.com/jsf/facelets"
+      xmlns:p="http://primefaces.org/ui"
+      xmlns:h="http://java.sun.com/jsf/html">
+
+    <h:body>
+        <ui:composition template="/template.xhtml">
+            <ui:define name="body">
+
+                <p:panelGrid columns="2" style="width: 95%;margin: auto;" columnClasses="column1of30to70, column2of30to70"  rendered="#{webUserController.canManage_User}" >
+
+                    <p:panel header="Manage Users"  >
+                        <h:form>
+                            <h:panelGrid columns="1" >
+                                <p:commandButton  ajax="false" value="Add New User" action="#{webUserController.toAddNewUser()}" styleClass="wideButton" />
+                                <p:commandButton   ajax="false" value="View Users" action="view_users"  styleClass="wideButton" />
+                                <p:commandButton   ajax="false" value="Change Passwords" action="change_password"  styleClass="wideButton" />
+                                <p:commandButton   ajax="false" value="Manage Privileges" action="privileges"  styleClass="wideButton" />                                
+                                <p:commandButton   ajax="false" value="Add Department to User" action="user_departments"  styleClass="wideButton" />
+                                <p:commandButton   ajax="false" value="User Login Details" action="logins"  styleClass="wideButton" />
+                                <ui:insert name="userimage">
+                                    <p:graphicImage library="image" name="user_manage.png" styleClass="sideImage" ></p:graphicImage>
+                                </ui:insert>
+                            </h:panelGrid>
+                        </h:form>
+                    </p:panel>
+                    
+                    <ui:insert name="manageusers">
+                        <p:panel header="Last Logins" >
+
+
+                        </p:panel>
+                    </ui:insert>
+
+                </p:panelGrid>
+
+
+            </ui:define>
+        </ui:composition>
+    </h:body>
+</html>

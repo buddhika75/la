@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://java.sun.com/jsf/facelets"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:f="http://java.sun.com/jsf/core"
+      xmlns:p="http://primefaces.org/ui">
+
+    <ui:composition>
+
+        <p:dialog id="InstituteCreateDlg" widgetVar="InstituteCreateDialog" modal="true" resizable="false" appendTo="@(body)" header="#{bundleIns.CreateInstituteTitle}">
+            <h:form id="InstituteCreateForm">
+                <h:panelGroup id="display">
+                    <p:panelGrid columns="2" rendered="#{instituteController.selected != null}">
+                        <p:outputLabel value="#{bundleIns.CreateInstituteLabel_name}" for="name" />
+                        <p:inputText id="name" value="#{instituteController.selected.name}" title="#{bundleIns.CreateInstituteTitle_name}" />
+                        <p:outputLabel value="#{bundleIns.CreateInstituteLabel_parentInstitute}" for="parentInstitute" />
+                        <p:selectOneMenu id="parentInstitute" value="#{instituteController.selected.parentInstitute}" >
+                            <f:selectItems value="#{instituteController.itemsAvailableSelectOne}"
+                                           var="parentInstituteItem"
+                                           itemValue="#{parentInstituteItem}"/>
+                        </p:selectOneMenu>
+                    </p:panelGrid>
+                    <p:commandButton actionListener="#{instituteController.create}" value="#{bundleIns.Save}" update="display,:InstituteListForm:datalist,:growl" oncomplete="handleSubmit(args,'InstituteCreateDialog');"/>
+                    <p:commandButton value="#{bundleIns.Cancel}" onclick="InstituteCreateDialog.hide()"/>
+                </h:panelGroup>
+            </h:form>
+        </p:dialog>
+
+    </ui:composition>
+</html>

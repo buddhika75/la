@@ -1,0 +1,17 @@
+.sideImage{
+    width: 200px;
+}
+
+.column1of30to70{
+    width: 30%;
+    vertical-align: top;
+}
+
+.column2of30to70{
+    width: 70%;
+    vertical-align: top;
+}
+
+.wideButton{
+    width: 250px;
+}

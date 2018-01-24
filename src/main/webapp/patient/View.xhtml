@@ -1,0 +1,80 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://java.sun.com/jsf/facelets"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:f="http://java.sun.com/jsf/core"
+      xmlns:p="http://primefaces.org/ui">
+
+    <ui:composition>
+
+        <p:dialog id="PatientViewDlg" widgetVar="PatientViewDialog" modal="true" resizable="false" appendTo="@(body)" header="#{bundlePt.ViewPatientTitle}">
+            <h:form id="PatientViewForm">
+                <h:panelGroup id="display">
+                    <p:panelGrid columns="2" rendered="#{patientController.selected != null}">
+                        <h:outputText value="#{bundlePt.ViewPatientLabel_id}"/>
+                        <h:outputText value="#{patientController.selected.id}" title="#{bundlePt.ViewPatientTitle_id}"/>
+                        <h:outputText value="#{bundlePt.ViewPatientLabel_registeredInstitute}"/>
+                        <h:outputText value="#{patientController.selected.registeredInstitute}" title="#{bundlePt.ViewPatientTitle_registeredInstitute}"/>
+                        <h:outputText value="#{bundlePt.ViewPatientLabel_clinicNumber}"/>
+                        <h:outputText value="#{patientController.selected.clinicNumber}" title="#{bundlePt.ViewPatientTitle_clinicNumber}"/>
+                        <h:outputText value="#{bundlePt.ViewPatientLabel_dateOfRegistration}"/>
+                        <h:outputText value="#{patientController.selected.dateOfRegistration}" title="#{bundlePt.ViewPatientTitle_dateOfRegistration}">
+                            <f:convertDateTime pattern="MM/dd/yyyy" />
+                        </h:outputText>
+                        <h:outputText value="#{bundlePt.ViewPatientLabel_nameOfPatient}"/>
+                        <h:outputText value="#{patientController.selected.nameOfPatient}" title="#{bundlePt.ViewPatientTitle_nameOfPatient}"/>
+                        <h:outputText value="#{bundlePt.ViewPatientLabel_sex}"/>
+                        <h:outputText value="#{patientController.selected.sex}" title="#{bundlePt.ViewPatientTitle_sex}"/>
+                        <h:outputText value="#{bundlePt.ViewPatientLabel_dateOfBirth}"/>
+                        <h:outputText value="#{patientController.selected.dateOfBirth}" title="#{bundlePt.ViewPatientTitle_dateOfBirth}">
+                            <f:convertDateTime pattern="MM/dd/yyyy" />
+                        </h:outputText>
+                        <h:outputText value="#{bundlePt.ViewPatientLabel_age}"/>
+                        <h:outputText value="#{patientController.selected.age}" title="#{bundlePt.ViewPatientTitle_age}"/>
+                        <h:outputText value="#{bundlePt.ViewPatientLabel_ageInDays}"/>
+                        <h:outputText value="#{patientController.selected.ageInDays}" title="#{bundlePt.ViewPatientTitle_ageInDays}"/>
+                        <h:outputText value="#{bundlePt.ViewPatientLabel_telephoneNoMobile}"/>
+                        <h:outputText value="#{patientController.selected.telephoneNoMobile}" title="#{bundlePt.ViewPatientTitle_telephoneNoMobile}"/>
+                        <h:outputText value="#{bundlePt.ViewPatientLabel_telephoneNoHome}"/>
+                        <h:outputText value="#{patientController.selected.telephoneNoHome}" title="#{bundlePt.ViewPatientTitle_telephoneNoHome}"/>
+                        <h:outputText value="#{bundlePt.ViewPatientLabel_address}"/>
+                        <h:outputText value="#{patientController.selected.address}" title="#{bundlePt.ViewPatientTitle_address}"/>
+                        <h:outputText value="#{bundlePt.ViewPatientLabel_city}"/>
+                        <h:outputText value="#{patientController.selected.city}" title="#{bundlePt.ViewPatientTitle_city}"/>
+                        <h:outputText value="#{bundlePt.ViewPatientLabel_nic}"/>
+                        <h:outputText value="#{patientController.selected.nic}" title="#{bundlePt.ViewPatientTitle_nic}"/>
+                        <h:outputText value="#{bundlePt.ViewPatientLabel_referredBy}"/>
+                        <h:outputText value="#{patientController.selected.referredBy}" title="#{bundlePt.ViewPatientTitle_referredBy}"/>
+                        <h:outputText value="#{bundlePt.ViewPatientLabel_otherReferredBY}"/>
+                        <h:outputText value="#{patientController.selected.otherReferredBY}" title="#{bundlePt.ViewPatientTitle_otherReferredBY}"/>
+                        <h:outputText value="#{bundlePt.ViewPatientLabel_occupation}"/>
+                        <h:outputText value="#{patientController.selected.occupation}" title="#{bundlePt.ViewPatientTitle_occupation}"/>
+                        <h:outputText value="#{bundlePt.ViewPatientLabel_otherOccupation}"/>
+                        <h:outputText value="#{patientController.selected.otherOccupation}" title="#{bundlePt.ViewPatientTitle_otherOccupation}"/>
+                        <h:outputText value="#{bundlePt.ViewPatientLabel_race}"/>
+                        <h:outputText value="#{patientController.selected.race}" title="#{bundlePt.ViewPatientTitle_race}"/>
+                        <h:outputText value="#{bundlePt.ViewPatientLabel_raceOther}"/>
+                        <h:outputText value="#{patientController.selected.raceOther}" title="#{bundlePt.ViewPatientTitle_raceOther}"/>
+                        <h:outputText value="#{bundlePt.ViewPatientLabel_disgnosis}"/>
+                        <h:outputText value="#{patientController.selected.disgnosis}" title="#{bundlePt.ViewPatientTitle_disgnosis}"/>
+                        <h:outputText value="#{bundlePt.ViewPatientLabel_disgnosisComments}"/>
+                        <h:outputText value="#{patientController.selected.disgnosisComments}" title="#{bundlePt.ViewPatientTitle_disgnosisComments}"/>
+                        <h:outputText value="#{bundlePt.ViewPatientLabel_otherCtd}"/>
+                        <h:outputText value="#{patientController.selected.otherCtd}" title="#{bundlePt.ViewPatientTitle_otherCtd}"/>
+                        <h:outputText value="#{bundlePt.ViewPatientLabel_otherVasculitis}"/>
+                        <h:outputText value="#{patientController.selected.otherVasculitis}" title="#{bundlePt.ViewPatientTitle_otherVasculitis}"/>
+                        <h:outputText value="#{bundlePt.ViewPatientLabel_otherDiagnosis}"/>
+                        <h:outputText value="#{patientController.selected.otherDiagnosis}" title="#{bundlePt.ViewPatientTitle_otherDiagnosis}"/>
+                        <h:outputText value="#{bundlePt.ViewPatientLabel_rheumatoidArthritisData}"/>
+                        <h:outputText value="#{patientController.selected.rheumatoidArthritisData}" title="#{bundlePt.ViewPatientTitle_rheumatoidArthritisData}"/>
+                        <h:outputText value="#{bundlePt.ViewPatientLabel_systemicLupusErythematosusData}"/>
+                        <h:outputText value="#{patientController.selected.systemicLupusErythematosusData}" title="#{bundlePt.ViewPatientTitle_systemicLupusErythematosusData}"/>
+                    </p:panelGrid>
+                    <p:commandButton value="#{bundlePt.Close}" onclick="PatientViewDialog.hide()"/>
+                </h:panelGroup>
+            </h:form>
+        </p:dialog>
+
+    </ui:composition>
+</html>

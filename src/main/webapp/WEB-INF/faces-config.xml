@@ -1,0 +1,44 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<faces-config version="2.0"
+              xmlns="http://java.sun.com/xml/ns/javaee" 
+              xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" 
+              xsi:schemaLocation="http://java.sun.com/xml/ns/javaee http://java.sun.com/xml/ns/javaee/web-facesconfig_2_0.xsd">
+    <application>
+        <resource-bundle>
+            <base-name>/Bundle</base-name>
+            <var>bundle</var>
+        </resource-bundle>
+        <resource-bundle>
+            <base-name>/Bundle</base-name>
+            <var>bundle</var>
+        </resource-bundle>
+        <resource-bundle>
+            <base-name>/Bundle1</base-name>
+            <var>bundle1</var>
+        </resource-bundle>
+        <resource-bundle>
+            <base-name>/Bundle1</base-name>
+            <var>bundle1</var>
+        </resource-bundle>
+        <resource-bundle>
+            <base-name>/BundlePt</base-name>
+            <var>bundlePt</var>
+        </resource-bundle>
+        <resource-bundle>
+            <base-name>/BundleIns</base-name>
+            <var>bundleIns</var>
+        </resource-bundle>
+        <resource-bundle>
+            <base-name>/BundleArea</base-name>
+            <var>bundleArea</var>
+        </resource-bundle>
+        <resource-bundle>
+            <base-name>/BundleUser1</base-name>
+            <var>bundleUser1</var>
+        </resource-bundle>
+        <resource-bundle>
+            <base-name>/BundleUser2</base-name>
+            <var>bundleUser2</var>
+        </resource-bundle>
+    </application>
+</faces-config>

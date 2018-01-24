@@ -1,0 +1,130 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://java.sun.com/jsf/facelets"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:p="http://primefaces.org/ui"
+      xmlns:f="http://java.sun.com/jsf/core">
+
+    <h:head>
+        <title><ui:insert name="title">Wound Clinic</ui:insert></title>
+        <h:outputStylesheet library="css" name="jsfcrud.css"/>
+        <h:outputStylesheet library="css" name="main.css" />
+        <h:outputScript library="js" name="jsfcrud.js"/>
+    </h:head>
+
+    <h:body>
+
+
+
+        <p:layout fullPage="true" >
+
+            <p:growl id="growl" life="3000" autoUpdate="true" />
+
+            <p:layoutUnit position="north" header="Wound Clinic" >
+
+
+                <h:form id="menuForm"  rendered="#{webUserController.loggedUser ne null}" >
+                    <p:menubar>
+                        <p:menuitem value="#{bundle.Home}" outcome="/index" icon="ui-icon-home"/>
+                        <p:submenu label="Clinical" >
+                            <p:menuitem value="Search Patients" action="#{patientController.toAddNewPatient()}" ajax="false" />
+                            <p:menuitem value="Add New Patient" action="#{patientController.toAddNewPatient()}" ajax="false" />
+                            <p:menuitem value="Search Visits" action="/mail/all_responses" ajax="false" />
+                        </p:submenu>
+                        <p:submenu label="Reports" >
+                            <p:menuitem value="Analysis" action="/mail/suggestions" ajax="false" />
+                            <p:menuitem value="Patients" action="/patient/List" ajax="false" />
+                        </p:submenu>
+
+                        <p:submenu label="Users" >
+                            <p:menuitem value="Change Password" action="/mail/suggestions" ajax="false" />
+                        </p:submenu>
+
+                        <p:submenu label="#{bundle.Maintenance}" rendered="#{webUserController.canManage_Institutions or webUserController.canManage_Departments or webUserController.canManage_Items or webUserController.canManage_User}">
+                            <p:menuitem value="Institute" outcome="/institute/List.xhtml"  disabled ="#{!webUserController.canManage_Institutions}"/>
+                            <p:menuitem value="Department" outcome="/department/List.xhtml"  disabled ="#{!webUserController.canManage_Departments}"/>
+                            <p:menuitem value="Items" outcome="/item/List.xhtml"  disabled ="#{!webUserController.canManage_Items}"/>
+                            <p:menuitem value="Users" outcome="/webUser/index.xhtml"  disabled ="#{!webUserController.canManage_User}"/>
+                        </p:submenu>
+
+                        <p:submenu label="Administration">
+
+                        </p:submenu>
+
+
+                    </p:menubar>
+                </h:form>
+
+
+            </p:layoutUnit>
+
+            <p:layoutUnit position="south" >
+                <ui:insert name="footer">
+                    <h:panelGrid columns="4" >
+                        <p:outputLabel value="&copy; Sunila Software Solutions" ></p:outputLabel>
+                        <h:panelGroup >
+                            <p:spacer ></p:spacer>
+                            |
+                            <p:spacer ></p:spacer>
+                        </h:panelGroup>
+                        <p:outputLabel rendered="#{webUserController.loggedUser ne null}" value="You are logged as #{webUserController.loggedUser.name} from #{webUserController.loggedDepartment} of #{webUserController.loggableInstitutes}." ></p:outputLabel>
+                        <h:form >
+                            <p:commandLink rendered="#{webUserController.loggedUser ne null}" value="Logout" ajax="false" action="#{webUserController.logOut()}" ></p:commandLink>
+                        </h:form>
+                        <p:outputLabel rendered="#{webUserController.loggedUser eq null}" value="Please login to continue" ></p:outputLabel>
+
+                    </h:panelGrid>
+                </ui:insert>
+            </p:layoutUnit>
+
+            <p:layoutUnit position="center" >
+
+                <div class="appbg" >
+
+
+                    <p:panel header="Login" style="position: absolute; width: 390px; margin: auto; left: 2%; top:20%; padding: 10px;" rendered="#{webUserController.loggedUser eq null}" >
+                        <h:form >
+                            <h:panelGrid columns="3" >
+                                <p:outputLabel value="Username" ></p:outputLabel>
+                                <p:spacer width="10" height="1" ></p:spacer>
+                                <p:inputText value="#{webUserController.userName}" ></p:inputText>
+                                <p:outputLabel value="Password" ></p:outputLabel>
+                                <p:spacer width="10" height="1" ></p:spacer>
+                                <p:password value="#{webUserController.password}" ></p:password>
+                                <p:commandButton ajax="false" value="Login" action="#{webUserController.login()}" ></p:commandButton>
+                            </h:panelGrid>
+                        </h:form>
+                    </p:panel>
+
+                    <p:panel header="Department" style="position: absolute; width: 390px; margin: auto; left: 2%; top:20%; padding: 10px;"
+                             rendered="#{webUserController.loggedUser ne null and webUserController.loggedDepartment eq null}" >
+                        <h:form >
+                            <h:panelGrid columns="3" >
+                                <p:outputLabel value="Institution" ></p:outputLabel>
+                                <p:spacer width="10" height="1" ></p:spacer>
+                                <p:selectOneMenu value="#{webUserController.loggedInstitute}" >
+                                    <f:selectItems value="#{webUserController.loggableInstitutes}" ></f:selectItems>
+                                </p:selectOneMenu>
+                                <p:outputLabel value="Department" ></p:outputLabel>
+                                <p:spacer width="10" height="1" ></p:spacer>
+                                <p:selectOneMenu value="#{webUserController.loggedDepartment}" >
+                                    <f:selectItems value="#{webUserController.loggableDepartments}" ></f:selectItems>
+                                </p:selectOneMenu>
+                                <p:commandButton ajax="false" value="Login" action="#{webUserController.login()}" ></p:commandButton>
+                            </h:panelGrid>
+                        </h:form>
+                    </p:panel>
+
+                    <h:panelGroup rendered="#{webUserController.loggedUser ne null}" >
+                        <ui:insert name="body"> </ui:insert>
+                    </h:panelGroup>
+
+                </div>
+            </p:layoutUnit>
+
+        </p:layout>
+
+    </h:body>
+
+</html>
