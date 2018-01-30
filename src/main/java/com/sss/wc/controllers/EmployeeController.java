@@ -74,7 +74,7 @@ public class EmployeeController implements Serializable {
             JsfUtil.addSuccessMessage("Updated");
         }
         selected = null;
-        return "";
+        return "/employee/list";
     }
 
     public Employee getSelected() {
