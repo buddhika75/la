@@ -11,18 +11,18 @@
         <ui:composition template="/template.xhtml">
 
             <ui:define name="title">
-                Patient
+                Staff
             </ui:define>
 
             <ui:define name="body">
 
-                <f:view>
+                <f:view locale="#{webUserController.selected.userLanguage}">
 
 
                     <h:form>
                         <p:panel  style="margin: auto" >
                             <f:facet name="header">
-                                <p:outputLabel value="Patient Details" ></p:outputLabel>
+                                <p:outputLabel value="Staff Details" ></p:outputLabel>
                             </f:facet>
                             <p:panelGrid columns="2" >
                                 <h:panelGroup >

@@ -42,6 +42,23 @@ public class WebUser implements Serializable {
     Department department;
     @Transient
     String repeatPassword;
+    
+    String userLanguage;
+
+    public String getUserLanguage() {
+        if(userLanguage==null){
+            userLanguage = "si";
+        }
+        return userLanguage;
+    }
+
+    public void setUserLanguage(String userLanguage) {
+        this.userLanguage = userLanguage;
+    }
+    
+    
+    
+    
 
     public String getRepeatPassword() {
         return repeatPassword;
