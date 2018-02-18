@@ -11,67 +11,37 @@
         <p:dialog id="PatientCreateDlg" widgetVar="PatientCreateDialog" modal="true" resizable="false" appendTo="@(body)" header="#{bundlePt.CreatePatientTitle}">
             <h:form id="PatientCreateForm">
                 <h:panelGroup id="display">
-                    <p:panelGrid columns="12" rendered="#{employeeController.selected != null}">
-                        <p:inputText id="nameOfPatient" value="#{employeeController.selected.nameOfPatient}" title="#{bundlePt.CreatePatientTitle_nameOfPatient}" />
-                        <p:outputLabel value="#{bundlePt.CreatePatientLabel_sex}" for="sex" />
-                        <p:inputText id="sex" value="#{employeeController.selected.sex}" title="#{bundlePt.CreatePatientTitle_sex}" />
-                        <p:outputLabel value="#{bundlePt.CreatePatientLabel_dateOfBirth}" for="dateOfBirth" />
-                        <p:calendar id="dateOfBirth" pattern="MM/dd/yyyy" value="#{employeeController.selected.dateOfBirth}" title="#{bundlePt.EditPatientTitle_dateOfBirth}"  showOn="button"/>
-                        <p:outputLabel value="#{bundlePt.CreatePatientLabel_age}" for="age" />
-                        <p:inputText id="age" value="#{employeeController.selected.age}" title="#{bundlePt.CreatePatientTitle_age}" />
-                        <p:outputLabel value="#{bundlePt.CreatePatientLabel_ageInDays}" for="ageInDays" />
-                        <p:inputText id="ageInDays" value="#{employeeController.selected.ageInDays}" title="#{bundlePt.CreatePatientTitle_ageInDays}" />
-                        <p:outputLabel value="#{bundlePt.CreatePatientLabel_telephoneNoMobile}" for="telephoneNoMobile" />
-                        <p:inputText id="telephoneNoMobile" value="#{employeeController.selected.telephoneNoMobile}" title="#{bundlePt.CreatePatientTitle_telephoneNoMobile}" />
-                        <p:outputLabel value="#{bundlePt.CreatePatientLabel_telephoneNoHome}" for="telephoneNoHome" />
-                        <p:inputText id="telephoneNoHome" value="#{employeeController.selected.telephoneNoHome}" title="#{bundlePt.CreatePatientTitle_telephoneNoHome}" />
-                        <p:outputLabel value="#{bundlePt.CreatePatientLabel_address}" for="address" />
-                        <p:inputTextarea rows="4" cols="30" id="address" value="#{employeeController.selected.address}" title="#{bundlePt.CreatePatientTitle_address}" />
-                        <p:outputLabel value="#{bundlePt.CreatePatientLabel_city}" for="city" />
-                        <p:selectOneMenu id="city" value="#{employeeController.selected.city}" >
-                            <f:selectItems value="#{areaController.itemsAvailableSelectOne}"
-                                           var="cityItem"
-                                           itemValue="#{cityItem}"/>
-                        </p:selectOneMenu>
-                        <p:outputLabel value="#{bundlePt.CreatePatientLabel_nic}" for="nic" />
-                        <p:inputText id="nic" value="#{employeeController.selected.nic}" title="#{bundlePt.CreatePatientTitle_nic}" />
-                        <p:outputLabel value="#{bundlePt.CreatePatientLabel_referredBy}" for="referredBy" />
-                        <p:inputText id="referredBy" value="#{employeeController.selected.referredBy}" title="#{bundlePt.CreatePatientTitle_referredBy}" />
-                        <p:outputLabel value="#{bundlePt.CreatePatientLabel_otherReferredBY}" for="otherReferredBY" />
-                        <p:inputText id="otherReferredBY" value="#{employeeController.selected.otherReferredBY}" title="#{bundlePt.CreatePatientTitle_otherReferredBY}" />
-                        <p:outputLabel value="#{bundlePt.CreatePatientLabel_occupation}" for="occupation" />
-                        <p:inputText id="occupation" value="#{employeeController.selected.occupation}" title="#{bundlePt.CreatePatientTitle_occupation}" />
-                        <p:outputLabel value="#{bundlePt.CreatePatientLabel_otherOccupation}" for="otherOccupation" />
-                        <p:inputText id="otherOccupation" value="#{employeeController.selected.otherOccupation}" title="#{bundlePt.CreatePatientTitle_otherOccupation}" />
-                        <p:outputLabel value="#{bundlePt.CreatePatientLabel_race}" for="race" />
-                        <p:inputText id="race" value="#{employeeController.selected.race}" title="#{bundlePt.CreatePatientTitle_race}" />
-                        <p:outputLabel value="#{bundlePt.CreatePatientLabel_raceOther}" for="raceOther" />
-                        <p:inputText id="raceOther" value="#{employeeController.selected.raceOther}" title="#{bundlePt.CreatePatientTitle_raceOther}" />
-                        <p:outputLabel value="#{bundlePt.CreatePatientLabel_disgnosis}" for="disgnosis" />
-                        <p:selectManyCheckbox id="disgnosis" value="#{employeeController.selected.disgnosis}" >
-                            <f:selectItems value="#{enumController.diagnosises}" ></f:selectItems>
-                        </p:selectManyCheckbox>
+                    <p:panelGrid columns="2" rendered="#{employeeController.selected != null}">
 
-                        <p:outputLabel value="#{bundlePt.CreatePatientLabel_disgnosisComments}" for="disgnosisComments" />
-                        <p:inputTextarea rows="4" cols="30" id="disgnosisComments" value="#{employeeController.selected.disgnosisComments}" title="#{bundlePt.CreatePatientTitle_disgnosisComments}" />
-                        <p:outputLabel value="#{bundlePt.CreatePatientLabel_otherCtd}" for="otherCtd" />
-                        <p:inputText id="otherCtd" value="#{employeeController.selected.otherCtd}" title="#{bundlePt.CreatePatientTitle_otherCtd}" />
-                        <p:outputLabel value="#{bundlePt.CreatePatientLabel_otherVasculitis}" for="otherVasculitis" />
-                        <p:inputText id="otherVasculitis" value="#{employeeController.selected.otherVasculitis}" title="#{bundlePt.CreatePatientTitle_otherVasculitis}" />
-                        <p:outputLabel value="#{bundlePt.CreatePatientLabel_otherDiagnosis}" for="otherDiagnosis" />
-                        <p:inputText id="otherDiagnosis" value="#{employeeController.selected.otherDiagnosis}" title="#{bundlePt.CreatePatientTitle_otherDiagnosis}" />
-                        <p:outputLabel value="#{bundlePt.CreatePatientLabel_rheumatoidArthritisData}" for="rheumatoidArthritisData" />
-                        <p:selectOneMenu id="rheumatoidArthritisData" value="#{employeeController.selected.rheumatoidArthritisData}" >
-                            <f:selectItems value="#{rheumatoidArthritisDataController.itemsAvailableSelectOne}"
-                                           var="rheumatoidArthritisDataItem"
-                                           itemValue="#{rheumatoidArthritisDataItem}"/>
-                        </p:selectOneMenu>
-                        <p:outputLabel value="#{bundlePt.CreatePatientLabel_systemicLupusErythematosusData}" for="systemicLupusErythematosusData" />
-                        <p:selectOneMenu id="systemicLupusErythematosusData" value="#{employeeController.selected.systemicLupusErythematosusData}" >
-                            <f:selectItems value="#{systemicLupusErythematosusDataController.itemsAvailableSelectOne}"
-                                           var="systemicLupusErythematosusDataItem"
-                                           itemValue="#{systemicLupusErythematosusDataItem}"/>
-                        </p:selectOneMenu>
+                        <p:outputLabel value="Name:" for="nameOfPatient" />
+                        <p:inputText required="true" id="nameOfPatient" style="width: 300px;" value="#{employeeController.selected.nameOfEmployee}" title="NameOfPatient" />
+
+
+                        <p:outputLabel value="NIC:" for="nic" />
+                        <p:inputText id="nic" value="#{employeeController.selected.nic}" title="ClinicNumber" />
+
+                        <p:outputLabel value="Salary Code:" for="sc" />
+                        <p:inputText id="sc" value="#{employeeController.selected.salaryCode}" title="ClinicNumber" />
+
+
+                        <p:outputLabel value="Gender:" for="gender" />
+                        <p:selectOneButton id="gender" value="#{employeeController.selected.gender}"  label="Gender" required="true">
+                            <f:selectItems value="#{enumController.genders}" ></f:selectItems>
+                        </p:selectOneButton>
+                        <p:outputLabel value="Date of Birth:" for="dateOfBirth" />
+                        <p:calendar navigator="true" yearRange="c-60:c-16"
+                                    id="dateOfBirth" pattern="dd MM yyyy" 
+                                    value="#{employeeController.selected.dateOfBirth}"
+                                    title="DateOfBirth"  >
+                        </p:calendar>
+
+
+                        <p:outputLabel value="Contact No.:" for="telephoneNoMobile" />
+                        <p:inputText id="telephoneNoMobile" value="#{employeeController.selected.contactNumber }" title="TelephoneNoMobile" />
+                        <p:outputLabel value="Address:" for="address" />
+                        <p:inputTextarea rows="4" cols="30" id="address" value="#{employeeController.selected.address}" title="Address" />
+
+
                     </p:panelGrid>
                     <p:commandButton actionListener="#{employeeController.create}" value="#{bundlePt.Save}" update="display,:PatientListForm:datalist,:growl" oncomplete="handleSubmit(args,'PatientCreateDialog');"/>
                     <p:commandButton value="#{bundlePt.Cancel}" onclick="PatientCreateDialog.hide()"/>

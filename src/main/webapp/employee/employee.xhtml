@@ -26,7 +26,7 @@
                             </f:facet>
                             <p:panelGrid columns="2" >
                                 <h:panelGroup >
-                                    <p:panelGrid columns="2" >
+                                    <p:panelGrid columns="2" rendered="#{employeeController.selected ne null}" >
 
                                         <p:outputLabel value="Name:" for="nameOfPatient" />
                                         <p:inputText required="true" id="nameOfPatient" style="width: 300px;" value="#{employeeController.selected.nameOfEmployee}" title="NameOfPatient" />
@@ -44,7 +44,9 @@
                                             <f:selectItems value="#{enumController.genders}" ></f:selectItems>
                                         </p:selectOneButton>
                                         <p:outputLabel value="Date of Birth:" for="dateOfBirth" />
-                                        <p:calendar navigator="true" id="dateOfBirth" pattern="dd MM yyyy" value="#{employeeController.selected.dateOfBirth}" title="DateOfBirth"  >
+                                        <p:calendar
+                                            yearRange="c-60:c-16"
+                                            navigator="true" id="dateOfBirth" pattern="dd MM yyyy" value="#{employeeController.selected.dateOfBirth}" title="DateOfBirth"  >
                                         </p:calendar>
 
 
@@ -54,7 +56,7 @@
                                         <p:inputTextarea rows="4" cols="30" id="address" value="#{employeeController.selected.address}" title="Address" />
 
                                         <p:spacer></p:spacer>
-                                        <p:commandButton ajax="false" action="#{employeeController.savePatient()}" value="Save" ></p:commandButton>
+                                        <p:commandButton ajax="false" action="#{employeeController.saveEmployee()}" value="Save" ></p:commandButton>
 
 
                                     </p:panelGrid>

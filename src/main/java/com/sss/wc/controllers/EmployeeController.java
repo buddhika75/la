@@ -61,7 +61,7 @@ public class EmployeeController implements Serializable {
         return "/employee/employee";
     }
 
-    public String savePatient() {
+    public String saveEmployee() {
         if (selected == null) {
             JsfUtil.addErrorMessage("Nothing to save");
             return "";
@@ -74,7 +74,7 @@ public class EmployeeController implements Serializable {
             JsfUtil.addSuccessMessage("Updated");
         }
         selected = null;
-        return "/employee/list";
+        return "/employee/List";
     }
 
     public Employee getSelected() {
