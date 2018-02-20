@@ -15,7 +15,7 @@
                         <h:form>
                             <h:panelGrid columns="1" >
                                 <p:commandButton  ajax="false" value="Add New User" action="#{webUserController.toAddNewUser()}" styleClass="wideButton" />
-                                <p:commandButton   ajax="false" value="View Users" action="view_users"  styleClass="wideButton" />
+                                <p:commandButton   ajax="false" value="View Users" action="#{webUserController.toViewUsers()}"  styleClass="wideButton" />
                                 <ui:insert name="userimage">
                                     <p:graphicImage library="image" name="user_manage.png" styleClass="sideImage" ></p:graphicImage>
                                 </ui:insert>

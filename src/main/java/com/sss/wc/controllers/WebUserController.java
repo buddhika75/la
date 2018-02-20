@@ -212,7 +212,8 @@ public class WebUserController implements Serializable {
     }
 
     public String toViewUsers() {
-
+        items = null;
+        items=getFacade().findAll();
         return "/webUser/view_users";
     }
 
