@@ -46,6 +46,8 @@ public class Employee implements Serializable {
     String contactNumber;
     private String nic;
     private Long salaryCode;
+    @ManyToOne
+    Item designation;
 
     private Boolean active;
     @Temporal(javax.persistence.TemporalType.DATE)
@@ -141,6 +143,17 @@ public class Employee implements Serializable {
         this.contactNumber = contactNumber;
     }
 
+    public Item getDesignation() {
+        return designation;
+    }
+
+    public void setDesignation(Item designation) {
+        this.designation = designation;
+    }
+
+    
+    
+    
     @Override
     public int hashCode() {
         int hash = 0;

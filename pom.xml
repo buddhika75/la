@@ -21,6 +21,12 @@
             <version>6.1</version>
         </dependency>
         <dependency>
+            <groupId>commons-io</groupId>
+            <artifactId>commons-io</artifactId>
+            <version>2.3</version>
+            <type>jar</type>
+        </dependency>
+        <dependency>
             <groupId>javax</groupId>
             <artifactId>javaee-web-api</artifactId>
             <version>6.0</version>
@@ -61,6 +67,14 @@
             <version>1.0.8</version>
         </dependency>
         
+        
+        <!-- https://mvnrepository.com/artifact/com.linuxense/javadbf -->
+        <dependency>
+            <groupId>com.linuxense</groupId>
+            <artifactId>javadbf</artifactId>
+            <version>0.4.0</version>
+        </dependency>
+
     </dependencies>
 
     <build>

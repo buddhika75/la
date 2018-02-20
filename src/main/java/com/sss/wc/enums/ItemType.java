@@ -11,7 +11,7 @@ package com.sss.wc.enums;
  */
 public enum ItemType {
     Position,
-    Wound_dressing,
+    Designation,
     Oral_medications,
     
 }

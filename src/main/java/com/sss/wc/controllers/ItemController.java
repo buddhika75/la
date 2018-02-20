@@ -5,9 +5,12 @@ package com.sss.wc.controllers;
 import com.sss.wc.controllers.util.JsfUtil;
 import com.sss.wc.controllers.util.JsfUtil.PersistAction;
 import com.sss.wc.entity.Item;
+import com.sss.wc.enums.ItemType;
 import com.sss.wc.facades.ItemFacade;
 import java.io.Serializable;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 import java.util.ResourceBundle;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -29,6 +32,23 @@ public class ItemController implements Serializable {
     private List<Item> items = null;
     private Item selected;
 
+    public Item findItem(String name,ItemType type){
+        String jpql;
+        Map m = new HashMap();
+        jpql = "select i from Item i where lower(i.name) = :n and i.itemCategory = :cat";
+        m.put("n", name.toLowerCase());
+        m.put("cat", type);
+        Item ti = getFacade().findFirstBySQL(jpql, m);
+        if(ti==null){
+            ti=new Item();
+            ti.setName(name);
+            ti.setItemCategory(type);
+            getFacade().create(ti);
+        }
+        return ti;
+    }
+    
+    
     public ItemController() {
     }
 

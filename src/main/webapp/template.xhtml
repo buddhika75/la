@@ -27,9 +27,12 @@
                 <h:form id="menuForm"  rendered="#{webUserController.loggedUser ne null}" >
                     <p:menubar>
                         <p:menuitem value="#{bundle.Home}" outcome="/index" icon="ui-icon-home"/>
-                        <p:submenu label="Leave" >
+                        <p:submenu label="Employee" >
                             <p:menuitem value="Add Employee" action="#{employeeController.toAddNewEmployee()}" ajax="false" />
-                            <p:menuitem value="Manage Employee" action="/employee/List" ajax="false" />
+                            <p:menuitem value="Manage Employees" action="/employee/List" ajax="false" />
+                            <p:menuitem value="Upload Employees from Payroll" action="/employee/upload" ajax="false" />
+                        </p:submenu>
+                        <p:submenu label="Leave" >
                             <p:menuitem value="Add Leave" action="#{employeeLeaveController.toAddNewEmployeeLeave()}" ajax="false" />
                             <p:menuitem value="Manage Leave" action="#{employeeController.toAddNewEmployee()}" ajax="false" />
                         </p:submenu>

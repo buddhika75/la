@@ -1,0 +1,54 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://java.sun.com/jsf/facelets"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:f="http://java.sun.com/jsf/core"
+      xmlns:p="http://primefaces.org/ui">
+
+    <body>
+
+        <ui:composition template="/template.xhtml">
+
+            <ui:define name="title">
+                Staff
+            </ui:define>
+
+            <ui:define name="body">
+
+                <p:panelGrid columns="2" >
+                    <p:panel >
+
+                        <h:form enctype="multipart/form-data">
+                            <p:panelGrid columns="2" >
+
+                                <h:outputText value="Select the file and Upload"/>
+                                <p:fileUpload value="#{dbfController.file}" mode="simple" ></p:fileUpload>
+                                <p:commandButton value="Upload Employee Data" ajax="false" action="#{dbfController.extractData}" ></p:commandButton>
+                            </p:panelGrid>
+                        </h:form>
+                    </p:panel>
+
+                    <p:panel header="Instruction to submit" >
+                        This page allows you to upload the data in the payroll system to the web application. <br/>
+                        <br/>
+                        First you have to select your institution. If you institution is not listed, please contact the administrators to add it for you.
+                        <br/>
+                        You need to locate the Folder where the payroll application is installed. Usually it is located in the c:gpswt12 folder. Please locate PYREMPMA.DBF file and upload it. It containts all the details of the employees.
+                        <br/>
+                        After you select the file and click the upload button, you will see a list of the details you are going to save to the system.  You will also see the list of the data already stored in the system. If you click the save button, the system will replace the existing data with the new data you upload.
+                        <br/>
+                        <br/>
+                    </p:panel>
+
+
+                </p:panelGrid>
+
+
+
+            </ui:define>
+
+        </ui:composition>
+
+    </body>
+</html>

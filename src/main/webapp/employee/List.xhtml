@@ -55,6 +55,12 @@
                         </p:column>
                         <p:column>
                             <f:facet name="header">
+                                <h:outputText value="Designation"/>
+                            </f:facet>
+                            <h:outputText value="#{item.designation.name}"/>
+                        </p:column>
+                        <p:column>
+                            <f:facet name="header">
                                 <h:outputText value="#{bundlePt.ListPatientTitle_dateOfBirth}"/>
                             </f:facet>
                             <h:outputText value="#{item.dateOfBirth}">
