@@ -1,0 +1,59 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://java.sun.com/jsf/facelets"
+      xmlns:p="http://primefaces.org/ui"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:f="http://java.sun.com/jsf/core">
+
+    <body>
+
+        <ui:composition template="./index.xhtml">
+
+
+
+            <ui:define name="manageusers">
+
+                <h:form >
+                    <h:panelGrid columns="1" >
+                        <p:panel header="Manage Privileges of #{userPrivilegeController.webUser.name}"  >
+                            <p:panelGrid columns="3" >
+                                <p:outputLabel value="Privilege" ></p:outputLabel>
+                                <p:selectOneMenu value="#{userPrivilegeController.privilege}" >
+                                    <f:selectItems value="#{enumController.privileges}" ></f:selectItems>
+                                </p:selectOneMenu>
+                                <p:commandButton value="Add Privilege" ajax="false" action="#{userPrivilegeController.addWebUserPrivilege()}" ></p:commandButton>
+                            </p:panelGrid>
+                            <p:dataTable value="#{userPrivilegeController.webUserPrivileges}" var="item">
+                                <p:column width="150">
+                                    <f:facet name="header">
+                                        <h:outputText value="Privilege"/>
+                                    </f:facet>
+                                    <h:outputText value="#{item.privilege}"/>
+                                </p:column>
+                                <p:column>
+                                    <f:facet name="header">
+                                        <h:outputText value="Action"/>
+                                    </f:facet>
+                                    <p:commandButton ajax="false" value="Remove Privilege" action="#{userPrivilegeController.removeUserPrivilege()}" >
+                                        <f:setPropertyActionListener value="#{item}" target="#{userPrivilegeController.selected}" ></f:setPropertyActionListener>
+                                    </p:commandButton>
+                                </p:column>
+                            </p:dataTable>
+
+
+                        </p:panel>
+                        <p:graphicImage library="image" name="user_view.png" styleClass="sideImage" ></p:graphicImage>
+
+                    </h:panelGrid>
+
+                </h:form>
+
+
+
+            </ui:define>
+
+        </ui:composition>
+
+    </body>
+</html>

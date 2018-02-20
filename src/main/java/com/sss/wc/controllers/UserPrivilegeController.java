@@ -4,6 +4,7 @@ import com.sss.wc.entity.UserPrivilege;
 import com.sss.wc.controllers.util.JsfUtil;
 import com.sss.wc.controllers.util.JsfUtil.PersistAction;
 import com.sss.wc.entity.WebUser;
+import com.sss.wc.enums.Privilege;
 import com.sss.wc.facades.UserPrivilegeFacade;
 
 import java.io.Serializable;
@@ -30,8 +31,83 @@ public class UserPrivilegeController implements Serializable {
     private com.sss.wc.facades.UserPrivilegeFacade ejbFacade;
     private List<UserPrivilege> items = null;
     private UserPrivilege selected;
+    Privilege privilege;
+    
+    WebUser webUser;
+    private List<UserPrivilege> WebUserPrivileges = null;
 
     public UserPrivilegeController() {
+    }
+
+    
+     public List<UserPrivilege> getWebUserPrivileges() {
+        if (webUser == null) {
+            return null;
+        }
+        if (WebUserPrivileges == null) {
+            String j = "select up from UserPrivilege up where up.webUser=:u";
+            Map m = new HashMap();
+            m.put("u", webUser);
+            WebUserPrivileges = getFacade().findBySQL(j, m);
+        }
+        return WebUserPrivileges;
+    }
+
+    public void addWebUserPrivilege() {
+        if (webUser == null) {
+            JsfUtil.addErrorMessage("Select User");
+            return;
+        }
+        if (privilege == null) {
+            JsfUtil.addErrorMessage("Select Privilege");
+        }
+        UserPrivilege up;
+        String j = "select up from UserPrivilege up where up.webUser=:u and up.privilege=:p";
+        Map m = new HashMap();
+        m.put("u", webUser);
+        m.put("p", privilege);
+        up = getFacade().findFirstBySQL(j, m);
+        if (up == null) {
+            up = new UserPrivilege();
+            up.setWebUser(webUser);
+            up.setPrivilege(privilege);
+            getFacade().create(up);
+            WebUserPrivileges = null;
+            getWebUserPrivileges();
+            JsfUtil.addSuccessMessage("Privilege added");
+        } else {
+            JsfUtil.addErrorMessage("Already added");
+        }
+
+    }
+
+    public void removeUserPrivilege() {
+        if (selected == null) {
+            JsfUtil.addErrorMessage("Nothing to remove");
+            return;
+        }
+        getFacade().remove(selected);
+        WebUserPrivileges = null;
+        getWebUserPrivileges();
+    }
+
+    public Privilege getPrivilege() {
+        return privilege;
+    }
+
+    public void setPrivilege(Privilege privilege) {
+        this.privilege = privilege;
+    }
+
+    
+    
+    public WebUser getWebUser() {
+        return webUser;
+    }
+
+    public void setWebUser(WebUser webUser) {
+        this.webUser = webUser;
+        WebUserPrivileges = null;
     }
 
     public UserPrivilege getSelected() {
@@ -41,6 +117,8 @@ public class UserPrivilegeController implements Serializable {
     public void setSelected(UserPrivilege selected) {
         this.selected = selected;
     }
+    
+    
 
     protected void setEmbeddableKeys() {
     }
@@ -57,8 +135,8 @@ public class UserPrivilegeController implements Serializable {
         initializeEmbeddableKey();
         return selected;
     }
-    
-     public void createOrUpdate(UserPrivilege up) {
+
+    public void createOrUpdate(UserPrivilege up) {
         try {
             if (up.getId() == null) {
                 getFacade().create(up);
@@ -109,7 +187,7 @@ public class UserPrivilegeController implements Serializable {
         m.put("wu", wu);
         return getFacade().findBySQL(jpql, m);
     }
-    
+
     private void persist(PersistAction persistAction, String successMessage) {
         if (selected != null) {
             setEmbeddableKeys();

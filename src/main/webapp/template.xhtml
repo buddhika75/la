@@ -50,9 +50,7 @@
                             <p:menuitem value="Users" outcome="/webUser/index.xhtml"  disabled ="#{!webUserController.canManage_User}"/>
                         </p:submenu>
 
-                        <p:submenu label="Administration">
-
-                        </p:submenu>
+                        
 
 
                     </p:menubar>
@@ -99,24 +97,7 @@
                         </h:form>
                     </p:panel>
 
-                    <p:panel header="Department" style="position: absolute; width: 390px; margin: auto; left: 2%; top:20%; padding: 10px;"
-                             rendered="#{webUserController.loggedUser ne null and webUserController.loggedDepartment eq null}" >
-                        <h:form >
-                            <h:panelGrid columns="3" >
-                                <p:outputLabel value="Institution" ></p:outputLabel>
-                                <p:spacer width="10" height="1" ></p:spacer>
-                                <p:selectOneMenu value="#{webUserController.loggedInstitute}" >
-                                    <f:selectItems value="#{webUserController.loggableInstitutes}" ></f:selectItems>
-                                </p:selectOneMenu>
-                                <p:outputLabel value="Department" ></p:outputLabel>
-                                <p:spacer width="10" height="1" ></p:spacer>
-                                <p:selectOneMenu value="#{webUserController.loggedDepartment}" >
-                                    <f:selectItems value="#{webUserController.loggableDepartments}" ></f:selectItems>
-                                </p:selectOneMenu>
-                                <p:commandButton ajax="false" value="Login" action="#{webUserController.login()}" ></p:commandButton>
-                            </h:panelGrid>
-                        </h:form>
-                    </p:panel>
+                   
 
                     <h:panelGroup rendered="#{webUserController.loggedUser ne null}" >
                         <ui:insert name="body"> </ui:insert>

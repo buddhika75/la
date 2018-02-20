@@ -82,6 +82,11 @@ public class WebUserController implements Serializable {
         return "/webUser/add_new_user";
     }
 
+    public String toManagePrivilege() {
+        userPrivilegeController.setWebUser(selected);
+        return "/webUser/manage_privileges";
+    }
+    
     public String saveNewUser() {
         if (selected == null) {
             JsfUtil.addErrorMessage("Error");

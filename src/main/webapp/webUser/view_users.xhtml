@@ -2,7 +2,9 @@
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml"
       xmlns:ui="http://java.sun.com/jsf/facelets"
-      xmlns:p="http://primefaces.org/ui">
+      xmlns:p="http://primefaces.org/ui"
+      xmlns:f="http://java.sun.com/jsf/core"
+      xmlns:h="http://java.sun.com/jsf/html">
 
     <body>
 
@@ -13,9 +15,41 @@
             </ui:define>
 
             <ui:define name="manageusers">
-                <p:panel header="View Users"  >
-                    
-                </p:panel>
+
+
+                <h:form >
+                    <p:panel header="View Users"  >
+                        <p:dataTable value="#{webUserController.items}" var="u" >
+                            <p:column headerText="Name" >
+                                <p:outputLabel value="#{u.name}" ></p:outputLabel>
+                            </p:column>
+                            <p:column headerText="Institute" >
+                                <p:outputLabel value="#{u.institute.name}" ></p:outputLabel>
+                            </p:column>
+                            <p:column headerText="Department" >
+                                <p:outputLabel value="#{u.department.name}" ></p:outputLabel>
+                            </p:column>
+                            <p:column headerText="Username" >
+                                <p:outputLabel value="#{u.userName}" ></p:outputLabel>
+                            </p:column>
+                            <p:column>
+                                <f:facet name="header">
+                                    <h:outputText value="Action"/>
+                                </f:facet>
+                                <p:commandButton ajax="false" value="Change Password" action="#" ></p:commandButton>
+                                <p:commandButton ajax="false" value="Inactivate" action="#" ></p:commandButton>
+                                <p:commandButton ajax="false" value="Activate" action="#" ></p:commandButton>
+                                <p:commandButton ajax="false" value="Manage Privileges" action="#{webUserController.toManagePrivilege()}" >
+                                    <f:setPropertyActionListener value="#{u}" target="#{webUserController.selected}" ></f:setPropertyActionListener>
+                                </p:commandButton>
+                            </p:column>
+                        </p:dataTable>
+                    </p:panel>
+
+                </h:form>
+
+
+
             </ui:define>
 
         </ui:composition>

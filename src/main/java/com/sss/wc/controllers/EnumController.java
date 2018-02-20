@@ -10,6 +10,7 @@ import javax.inject.Named;
 import com.sss.wc.enums.Gender;
 import com.sss.wc.enums.ItemType;
 import com.sss.wc.enums.LeaveType;
+import com.sss.wc.enums.Privilege;
 
 /**
  *
@@ -35,6 +36,10 @@ public class EnumController {
 
     public LeaveType[] getLeaveTypes(){
         return LeaveType.values();
+    }
+    
+       public Privilege[] getPrivileges() {
+        return Privilege.values();
     }
     
 }
