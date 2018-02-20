@@ -81,10 +81,46 @@ public class WebUserController implements Serializable {
         selected.setActive(true);
         return "/webUser/add_new_user";
     }
+    
+    public String toChangePassword() {
+        return "/webUser/change_password";
+    }
 
     public String toManagePrivilege() {
         userPrivilegeController.setWebUser(selected);
         return "/webUser/manage_privileges";
+    }
+
+    public String updateUser() {
+        if (selected == null) {
+            JsfUtil.addErrorMessage("Error");
+            return "";
+        }
+        getFacade().edit(selected);
+        JsfUtil.addSuccessMessage("User Details Updated.");
+        return "/webUser/index";
+    }
+
+    
+    public String updatePassword() {
+        if (selected == null) {
+            JsfUtil.addErrorMessage("Error");
+            return "";
+        }
+        if (selected.getPassword() == null || selected.getPassword().trim().equals("")) {
+            JsfUtil.addErrorMessage("Please enter a Password");
+            return "";
+        }
+        if (!selected.getPassword().equals(selected.getRepeatPassword())) {
+            JsfUtil.addErrorMessage("Passwords are NOT maching");
+            return "";
+        }
+        if (selected.getPassword().length() < 6) {
+            JsfUtil.addErrorMessage("Please use a longer password");
+        }
+        getFacade().edit(selected);
+        JsfUtil.addSuccessMessage("User Password Updated");
+        return "/webUser/index";
     }
     
     public String saveNewUser() {
@@ -142,7 +178,6 @@ public class WebUserController implements Serializable {
 //        ui2.setWebUser(selected);
 //        ui2.setPrivilege(Privilege.View_All_Reports);
 //        getUserPrivilegeController().createOrUpdate(ui2);
-
         UserPrivilege ui3 = new UserPrivilege();
         ui3.setWebUser(selected);
         ui3.setPrivilege(Privilege.View_Individual_Reports);
@@ -152,17 +187,14 @@ public class WebUserController implements Serializable {
 //        ui4.setWebUser(selected);
 //        ui4.setPrivilege(Privilege.Manage_Departments);
 //        getUserPrivilegeController().createOrUpdate(ui4);
-
 //        UserPrivilege ui5 = new UserPrivilege();
 //        ui5.setWebUser(selected);
 //        ui5.setPrivilege(Privilege.Manage_Institutions);
 //        getUserPrivilegeController().createOrUpdate(ui5);
-
 //        UserPrivilege ui6 = new UserPrivilege();
 //        ui6.setWebUser(selected);
 //        ui6.setPrivilege(Privilege.Manage_Items);
 //        getUserPrivilegeController().createOrUpdate(ui6);
-
         UserPrivilege ui7 = new UserPrivilege();
         ui7.setWebUser(selected);
         ui7.setPrivilege(Privilege.Manage_Leave);
@@ -172,22 +204,51 @@ public class WebUserController implements Serializable {
 //        ui8.setWebUser(selected);
 //        ui8.setPrivilege(Privilege.System_administration);
 //        getUserPrivilegeController().createOrUpdate(ui8);
-
 //        UserPrivilege ui9 = new UserPrivilege();
 //        ui9.setWebUser(loggedUser);
 //        ui9.setPrivilege(Privilege.Manage_User);
 //        getUserPrivilegeController().createOrUpdate(ui9);
-
         return "/webUser/index";
     }
 
-    
-    public String toViewUsers(){
-        
+    public String toViewUsers() {
+
         return "/webUser/view_users";
     }
-    
-    
+
+    public String toEditUsers() {
+
+        return "/webUser/edit_user";
+    }
+
+    public void activateUser() {
+        if (selected == null) {
+            JsfUtil.addErrorMessage("Nothign Selected");
+            return;
+        }
+        if (selected.isActive()) {
+            JsfUtil.addErrorMessage("Already Active");
+            return;
+        }
+        selected.setActive(true);
+        getFacade().edit(selected);
+        JsfUtil.addSuccessMessage("User Activated");
+    }
+
+    public void deactivateUser() {
+        if (selected == null) {
+            JsfUtil.addErrorMessage("Nothign Selected");
+            return;
+        }
+        if (!selected.isActive()) {
+            JsfUtil.addErrorMessage("Already Deactive");
+            return;
+        }
+        selected.setActive(false);
+        getFacade().edit(selected);
+        JsfUtil.addSuccessMessage("User De-activated");
+    }
+
     private void createLoginData() {
         if (loggedUser == null) {
             return;

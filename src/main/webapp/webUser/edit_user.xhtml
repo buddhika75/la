@@ -23,12 +23,7 @@
                                 <p:inputText id="name" value="#{webUserController.selected.name}" title="#{bundle.CreateWebUserTitle_name}" />
 
                                 <p:outputLabel value="#{bundle.CreateWebUserLabel_userName}" for="userName" />
-                                <p:inputText id="userName" value="#{webUserController.selected.userName}" title="#{bundle.CreateWebUserTitle_userName}" />
-                                <p:outputLabel value="#{bundle.CreateWebUserLabel_password}" for="password" />
-                                <p:password id="password" value="#{webUserController.selected.password}" title="#{bundle.CreateWebUserTitle_password}" />
-                                <p:outputLabel value="#{bundle.PasswordAgain}" for="passwordr" />
-                                <p:password id="passwordr" value="#{webUserController.selected.repeatPassword}" title="#{bundle.PasswordAgain}" />
-                                
+                                <p:inputText disabled="true" id="userName" value="#{webUserController.selected.userName}" title="#{bundle.CreateWebUserTitle_userName}" />
                                 <p:outputLabel value="#{bundle.CreateWebUserLabel_email}" for="email" />
                                 <p:inputText id="email" value="#{webUserController.selected.email}" title="#{bundle.CreateWebUserTitle_email}" />
                                 <p:outputLabel value="Institution" for="ins" />
@@ -44,7 +39,7 @@
 
                             </p:panelGrid>
                             <p:commandButton ajax="false"
-                                             actionListener="#{webUserController.saveNewUser}"
+                                             actionListener="#{webUserController.updateUser()}"
                                              value="#{bundle.Save}" />
                         </h:panelGroup>
                     </h:form>
