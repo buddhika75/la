@@ -3,10 +3,17 @@ package com.sss.wc.controllers;
 import com.sss.wc.entity.EmployeeLeave;
 import com.sss.wc.controllers.util.JsfUtil;
 import com.sss.wc.controllers.util.JsfUtil.PersistAction;
+import com.sss.wc.entity.Employee;
+import com.sss.wc.enums.LeaveSummery;
 import com.sss.wc.facades.EmployeeLeaveFacade;
 
 import java.io.Serializable;
+import java.util.ArrayList;
+import java.util.Calendar;
+import java.util.Date;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 import java.util.ResourceBundle;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -27,6 +34,161 @@ public class EmployeeLeaveController implements Serializable {
     private com.sss.wc.facades.EmployeeLeaveFacade ejbFacade;
     private List<EmployeeLeave> items = null;
     private EmployeeLeave selected;
+    List<LeaveSummery> leaveSummerries;
+    private LeaveSummery leaveSummeryTotal;
+    Employee employee;
+    private Date fromDate;
+    private Date toDate;
+
+    public void listSelectedEmployeeLeaveSummery() {
+        String j;
+        Map m = new HashMap();
+        j = "select new com.sss.wc.enums.LeaveSummery(l.employee, sum(l.leaveDays), l.leaveType) "
+                + " from EmployeeLeave l "
+                + " where l.employee=:emp "
+                + " and l.leaveFrom between :fd and :td "
+                + " group by l.leaveType, l.employee";
+        m.put("emp", employee);
+        m.put("fd", fromDate);
+        m.put("td", toDate);
+        List<Object> temLst;
+        temLst = getFacade().findGroupingBySql(j, m);
+        leaveSummerries = new ArrayList<LeaveSummery>();
+        leaveSummeryTotal = new LeaveSummery();
+        leaveSummeryTotal.setLeaveDays(0.0);
+        for (Object o : temLst) {
+            if (o instanceof LeaveSummery) {
+                LeaveSummery ls = (LeaveSummery) o;
+                leaveSummerries.add(ls);
+                leaveSummeryTotal.setLeaveDays(leaveSummeryTotal.getLeaveDays() + ls.getLeaveDays());
+            }
+        }
+
+    }
+
+    public void listAllEmployeeLeaveSummery() {
+        String j;
+        Map m = new HashMap();
+        j = "select new com.sss.wc.enums.LeaveSummery(l.employee, sum(l.leaveDays), l.leaveType) "
+                + " from EmployeeLeave l "
+                + " where l.leaveFrom between :fd and :td "
+                + " group by l.leaveType, l.employee";
+        List<Object> temLst;
+        m.put("fd", fromDate);
+        m.put("td", toDate);
+
+        temLst = getFacade().findGroupingBySql(j, m);
+        List<LeaveSummery> temLeaveSummerries = new ArrayList<LeaveSummery>();
+        leaveSummerries = new ArrayList<LeaveSummery>();
+
+        for (Object o : temLst) {
+            if (o instanceof LeaveSummery) {
+                LeaveSummery ls = (LeaveSummery) o;
+                temLeaveSummerries.add(ls);
+            }
+        }
+        for (LeaveSummery tls : temLeaveSummerries) {
+            boolean summeryForEmployeeExists = false;
+            for(LeaveSummery ls:leaveSummerries){
+                if(ls.getEmployee().equals(tls.getEmployee())){
+                    summeryForEmployeeExists = true;
+                }
+            }
+            if(!summeryForEmployeeExists){
+                LeaveSummery nls = new LeaveSummery();
+                nls.setEmployee(tls.getEmployee());
+                nls.setAnnualDays(0.0);
+                nls.setCasualDays(0.0);
+                nls.setDutyDays(0.0);
+                nls.setForeignDays(0.0);
+                nls.setMaternityDays(0.0);
+                nls.setOtherDays(0.0);
+                nls.setSickDays(0.0);
+                leaveSummerries.add(nls);
+            }
+        }
+        for (LeaveSummery tls : temLeaveSummerries) {
+            for(LeaveSummery ls:leaveSummerries){
+                if(ls.getEmployee().equals(tls.getEmployee())){
+                    switch (tls.getLeaveType()){
+                        case Annual_Leave : ls.setAnnualDays(ls.getAnnualDays() + tls.getLeaveDays()); break;
+                        case Casual_Leave:ls.setCasualDays(ls.getCasualDays() + tls.getLeaveDays()); break;
+                        case Duty_Leave:ls.setDutyDays(ls.getDutyDays() + tls.getLeaveDays()); break;
+                        case Foreign_Leave:ls.setForeignDays(ls.getForeignDays() + tls.getLeaveDays()); break;
+                        case Maternity_Leave:ls.setMaternityDays(ls.getMaternityDays() + tls.getLeaveDays()); break;
+                        case Sick_Leave:ls.setSickDays(ls.getSickDays() + tls.getLeaveDays()); break;
+                        case Other_Leave:ls.setOtherDays(ls.getOtherDays() + tls.getLeaveDays()); break;
+                    }
+                }
+            }
+        }
+        
+        
+    }
+
+    public String toAddNewEmployeeLeave() {
+        selected = new EmployeeLeave();
+        return "/employeeLeave/leave";
+    }
+
+    public void leaveDatesChanged() {
+        if (selected.getLeaveFrom() == null) {
+            return;
+        }
+        if (selected.getLeaveTo() == null) {
+            Calendar c = Calendar.getInstance();
+            c.setTime(selected.getLeaveFrom());
+            c.set(Calendar.HOUR_OF_DAY, 23);
+            c.set(Calendar.MINUTE, 59);
+            c.set(Calendar.SECOND, 59);
+            c.set(Calendar.MILLISECOND, 999);
+            selected.setLeaveTo(c.getTime());
+        }
+        Long days;
+        days = (selected.getLeaveTo().getTime() - selected.getLeaveFrom().getTime()) / (1000 * 60 * 60 * 24);
+        if (days > 1) {
+            days++;
+            selected.setLeaveDays(days.doubleValue());
+            return;
+        }
+        Long hours;
+        hours = (selected.getLeaveTo().getTime() - selected.getLeaveFrom().getTime());
+        Double dblHours = hours.doubleValue() / (1000 * 60 * 60);
+
+        if (dblHours < 4.1) {
+            selected.setLeaveDays(0.5);
+        } else {
+            selected.setLeaveDays(1.0);
+        }
+
+    }
+
+    public String saveLeave() {
+        if (selected.getEmployee() == null) {
+            JsfUtil.addErrorMessage("Select an Employee");
+            return "";
+        }
+        if (selected.getLeaveFrom() == null) {
+            JsfUtil.addErrorMessage("Select date");
+            return "";
+        }
+        if (selected.getLeaveTo() == null) {
+            selected.setLeaveTo(selected.getLeaveFrom());
+        }
+        if (selected.getLeaveType() == null) {
+            JsfUtil.addErrorMessage("Select Leave Type");
+            return "";
+        }
+        if (selected.getId() == null) {
+            getFacade().create(selected);
+            JsfUtil.addSuccessMessage("Leave Added");
+        } else {
+            getFacade().edit(selected);
+            JsfUtil.addSuccessMessage("Leave Updated");
+        }
+
+        return toAddNewEmployeeLeave();
+    }
 
     public EmployeeLeaveController() {
     }
@@ -119,6 +281,66 @@ public class EmployeeLeaveController implements Serializable {
 
     public List<EmployeeLeave> getItemsAvailableSelectOne() {
         return getFacade().findAll();
+    }
+
+    public List<LeaveSummery> getLeaveSummerries() {
+        return leaveSummerries;
+    }
+
+    public void setLeaveSummerries(List<LeaveSummery> leaveSummerries) {
+        this.leaveSummerries = leaveSummerries;
+    }
+
+    public Employee getEmployee() {
+        return employee;
+    }
+
+    public void setEmployee(Employee employee) {
+        this.employee = employee;
+    }
+
+    public LeaveSummery getLeaveSummeryTotal() {
+        return leaveSummeryTotal;
+    }
+
+    public void setLeaveSummeryTotal(LeaveSummery leaveSummeryTotal) {
+        this.leaveSummeryTotal = leaveSummeryTotal;
+    }
+
+    public Date getFromDate() {
+        if (fromDate == null) {
+            Calendar c = Calendar.getInstance();
+            c.set(Calendar.MILLISECOND, 1);
+            c.set(Calendar.SECOND, 0);
+            c.set(Calendar.MINUTE, 0);
+            c.set(Calendar.HOUR, 0);
+            c.set(Calendar.DAY_OF_YEAR, 1);
+            fromDate = c.getTime();
+        }
+        return fromDate;
+    }
+
+    public void setFromDate(Date fromDate) {
+        this.fromDate = fromDate;
+    }
+
+    public Date getToDate() {
+        if (toDate == null) {
+            Calendar c = Calendar.getInstance();
+            c.set(Calendar.MILLISECOND, 1);
+            c.set(Calendar.SECOND, 0);
+            c.set(Calendar.MINUTE, 0);
+            c.set(Calendar.HOUR, 0);
+            c.set(Calendar.DAY_OF_YEAR, 1);
+            c.add(Calendar.YEAR, 1);
+            c.add(Calendar.MILLISECOND, -2);
+            toDate = c.getTime();
+        }
+        return toDate;
+    }
+
+    public void setToDate(Date toDate) {
+        this.toDate = toDate;
     }
 
     @FacesConverter(forClass = EmployeeLeave.class)

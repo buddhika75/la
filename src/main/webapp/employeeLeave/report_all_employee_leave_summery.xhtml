@@ -1,0 +1,78 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://java.sun.com/jsf/facelets"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:p="http://primefaces.org/ui"
+      xmlns:f="http://java.sun.com/jsf/core">
+
+    <body>
+
+        <ui:composition template="./../template.xhtml">
+
+            <ui:define name="title">
+                Single Employee Leave Summery
+            </ui:define>
+
+            <ui:define name="body">
+                <h:form >
+                    <p:panel header="Single Employee Leave Summery" >
+                        <p:panelGrid columns="2" >
+                            <p:outputLabel value="LeaveFrom:" for="leaveFrom" />
+                            <p:calendar id="leaveFrom" value="#{employeeLeaveController.fromDate}" 
+                                        title="LeaveFrom" pattern="dd/MM/yyyy"
+                                        >
+                            </p:calendar>
+                            <p:outputLabel value="LeaveTo:" for="leaveTo" />
+                            <p:calendar id="leaveTo" value="#{employeeLeaveController.toDate}"
+                                        title="LeaveTo" pattern="dd/MM/yyyy" 
+                                        >
+                            </p:calendar>
+                        </p:panelGrid>
+                        <p:panelGrid columns="3" >
+                            <p:commandButton ajax="false" action="#{employeeLeaveController.listAllEmployeeLeaveSummery() }"
+                                             value="Process" ></p:commandButton>
+                            <p:commandButton ajax="false" value="Excel" >
+                                <p:dataExporter target="tbl" type="xls" fileName="All Employee Summery" ></p:dataExporter>
+                            </p:commandButton>
+                            <p:commandButton ajax="false" value="Print" >
+                                <p:printer target="tbl" ></p:printer>
+                            </p:commandButton>
+                        </p:panelGrid>
+
+
+
+                        <p:dataTable id="tbl" value="#{employeeLeaveController.leaveSummerries}" var="s" >
+                            <p:column headerText="Employee" >
+                                <p:outputLabel value="#{s.employee.nameOfEmployee}" ></p:outputLabel>
+                            </p:column>
+                            <p:column headerText="Annaul Leave" >
+                                <p:outputLabel value="#{s.annualDays}" ></p:outputLabel>
+                            </p:column>
+                            <p:column headerText="Casual Leave" >
+                                <p:outputLabel value="#{s.casualDays}" ></p:outputLabel>
+                            </p:column>
+                            <p:column headerText="Sick Leave" >
+                                <p:outputLabel value="#{s.sickDays}" ></p:outputLabel>
+                            </p:column>
+                            <p:column headerText="Maternity Leave" >
+                                <p:outputLabel value="#{s.maternityDays}" ></p:outputLabel>
+                            </p:column>
+                            <p:column headerText="Foreign Leave" >
+                                <p:outputLabel value="#{s.foreignDays}" ></p:outputLabel>
+                            </p:column>
+                            <p:column headerText="Duty Leave" >
+                                <p:outputLabel value="#{s.dutyDays}" ></p:outputLabel>
+                            </p:column>
+                            <p:column headerText="Other Leave" >
+                                <p:outputLabel value="#{s.otherDays}" ></p:outputLabel>
+                            </p:column>
+                        </p:dataTable>
+                    </p:panel>
+                </h:form>
+            </ui:define>
+
+        </ui:composition>
+
+    </body>
+</html>

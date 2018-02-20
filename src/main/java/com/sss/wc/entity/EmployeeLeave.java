@@ -7,6 +7,7 @@ package com.sss.wc.entity;
 
 import com.sss.wc.enums.LeaveType;
 import java.io.Serializable;
+import java.util.Calendar;
 import java.util.Date;
 import javax.persistence.Entity;
 import javax.persistence.EnumType;
@@ -35,7 +36,7 @@ public class EmployeeLeave implements Serializable {
     Date leaveFrom;
     @Temporal(javax.persistence.TemporalType.TIMESTAMP)
     Date leaveTo;
-    Integer leaveDays;
+    Double leaveDays;
     @Enumerated(EnumType.STRING)
     LeaveType leaveType;
     
@@ -56,6 +57,14 @@ public class EmployeeLeave implements Serializable {
     }
 
     public Date getLeaveFrom() {
+        if(leaveFrom==null){
+            Calendar c = Calendar.getInstance();
+            c.set(Calendar.HOUR, 0);
+            c.set(Calendar.MINUTE,0);
+            c.set(Calendar.SECOND, 0);
+            c.set(Calendar.MILLISECOND, 1);
+            leaveFrom = c.getTime();
+        }
         return leaveFrom;
     }
 
@@ -71,11 +80,11 @@ public class EmployeeLeave implements Serializable {
         this.leaveTo = leaveTo;
     }
 
-    public Integer getLeaveDays() {
+    public Double getLeaveDays() {
         return leaveDays;
     }
 
-    public void setLeaveDays(Integer leaveDays) {
+    public void setLeaveDays(Double leaveDays) {
         this.leaveDays = leaveDays;
     }
 

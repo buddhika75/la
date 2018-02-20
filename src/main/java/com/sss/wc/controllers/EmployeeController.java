@@ -7,7 +7,9 @@ import com.sss.wc.facades.EmployeeFacade;
 
 import java.io.Serializable;
 import java.util.Date;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 import java.util.ResourceBundle;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -45,7 +47,15 @@ public class EmployeeController implements Serializable {
     }
 
     
-    
+    public List<Employee> completeEmployee(String qry){
+        String j;
+        Map m = new HashMap();
+        j="select e from Employee e "
+                + " where lower(e.nameOfEmployee) like :q "
+                + " order by e.nameOfEmployee";
+        m.put("q", "%" + qry.toLowerCase() + "%");
+        return getFacade().findBySQL(j, m);
+    }
     
     public String toAddNewEmployee() {
         selected = new Employee();

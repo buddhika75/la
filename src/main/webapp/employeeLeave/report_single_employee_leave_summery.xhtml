@@ -1,0 +1,65 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://java.sun.com/jsf/facelets"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:p="http://primefaces.org/ui"
+      xmlns:f="http://java.sun.com/jsf/core">
+
+    <body>
+
+        <ui:composition template="./../template.xhtml">
+
+            <ui:define name="title">
+                Single Employee Leave Summery
+            </ui:define>
+
+            <ui:define name="body">
+                <h:form >
+                    <p:panel header="Single Employee Leave Summery" >
+                        <p:panelGrid columns="2" >
+                            <p:outputLabel value="Employee:" for="employee" />
+                            <p:autoComplete id="employee" 
+                                            value="#{employeeLeaveController.employee}"
+                                            completeMethod="#{employeeController.completeEmployee}"
+                                            var="e"
+                                            itemLabel="#{e.nameOfEmployee}"
+                                            itemValue="#{e}">
+                                <p:column headerText="Name" >
+                                    <p:outputLabel value="#{e.nameOfEmployee}" ></p:outputLabel>
+                                </p:column>
+                                <p:column headerText="Salary Code" >
+                                    <p:outputLabel value="#{e.salaryCode}" ></p:outputLabel>
+                                </p:column>
+                            </p:autoComplete>
+                            <p:outputLabel value="LeaveFrom:" for="leaveFrom" />
+                            <p:calendar id="leaveFrom" value="#{employeeLeaveController.fromDate}" 
+                                        title="LeaveFrom" pattern="dd/MM/yyyy"
+                                        >
+                            </p:calendar>
+                            <p:outputLabel value="LeaveTo:" for="leaveTo" />
+                            <p:calendar id="leaveTo" value="#{employeeLeaveController.toDate}"
+                                        title="LeaveTo" pattern="dd/MM/yyyy" 
+                                        >
+                            </p:calendar>
+                        </p:panelGrid>
+                        <p:commandButton ajax="false" action="#{employeeLeaveController.listSelectedEmployeeLeaveSummery()}"
+                                         value="Process" ></p:commandButton>
+                        
+                        
+                        <p:dataTable value="#{employeeLeaveController.leaveSummerries}" var="s" >
+                            <p:column headerText="Leave Type" >
+                                <p:outputLabel value="#{s.leaveType}" ></p:outputLabel>
+                            </p:column>
+                             <p:column headerText="Days" >
+                                 <p:outputLabel value="#{s.leaveDays}" ></p:outputLabel>
+                            </p:column>
+                        </p:dataTable>
+                    </p:panel>
+                </h:form>
+            </ui:define>
+
+        </ui:composition>
+
+    </body>
+</html>

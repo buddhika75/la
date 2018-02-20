@@ -16,5 +16,5 @@ public enum LeaveType {
     Foreign_Leave,
     Maternity_Leave,
     Annual_Leave,
-    
+    Other_Leave,
 }

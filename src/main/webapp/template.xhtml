@@ -30,12 +30,12 @@
                         <p:submenu label="Leave" >
                             <p:menuitem value="Add Employee" action="#{employeeController.toAddNewEmployee()}" ajax="false" />
                             <p:menuitem value="Manage Employee" action="/employee/List" ajax="false" />
-                            <p:menuitem value="Add Leave" action="#{employeeController.toAddNewEmployee()}" ajax="false" />
+                            <p:menuitem value="Add Leave" action="#{employeeLeaveController.toAddNewEmployeeLeave()}" ajax="false" />
                             <p:menuitem value="Manage Leave" action="#{employeeController.toAddNewEmployee()}" ajax="false" />
                         </p:submenu>
                         <p:submenu label="Reports" >
-                            <p:menuitem value="Individual Summery" action="/mail/suggestions" ajax="false" />
-                            <p:menuitem value="Individual Details" action="/patient/List" ajax="false" />
+                            <p:menuitem value="Individual Summery" action="/employeeLeave/report_single_employee_leave_summery" ajax="false" />
+                            <p:menuitem value="All Employee Summery" action="/employeeLeave/report_all_employee_leave_summery" ajax="false" />
                             <p:menuitem value="Employee Analysis" action="/patient/List" ajax="false" />
                         </p:submenu>
 

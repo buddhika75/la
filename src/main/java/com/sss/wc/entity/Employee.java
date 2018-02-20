@@ -15,6 +15,7 @@ import javax.persistence.Id;
 import javax.persistence.Lob;
 import javax.persistence.ManyToOne;
 import javax.persistence.Temporal;
+
 /**
  *
  * @author User
@@ -27,12 +28,11 @@ public class Employee implements Serializable {
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;
 
-    
     @Temporal(javax.persistence.TemporalType.DATE)
     Date dateOfTransferToCurrentStation;
     String referenceNumber;
     String nameOfEmployee;
-    
+
     @ManyToOne
     Institute registeredInstitute;
     @ManyToOne
@@ -43,16 +43,15 @@ public class Employee implements Serializable {
     String Age;
     @Lob
     String address;
-    String contactNumber;  
+    String contactNumber;
     private String nic;
     private Long salaryCode;
-    
+
     private Boolean active;
     @Temporal(javax.persistence.TemporalType.DATE)
     private Date activeFrom;
     @Temporal(javax.persistence.TemporalType.DATE)
     private Date activeTo;
-    
 
     public Long getId() {
         return id;
@@ -61,9 +60,6 @@ public class Employee implements Serializable {
     public void setId(Long id) {
         this.id = id;
     }
-    
-    
-    
 
     public Date getDateOfTransferToCurrentStation() {
         return dateOfTransferToCurrentStation;
@@ -144,10 +140,6 @@ public class Employee implements Serializable {
     public void setContactNumber(String contactNumber) {
         this.contactNumber = contactNumber;
     }
-    
-    
-
-
 
     @Override
     public int hashCode() {
@@ -171,7 +163,19 @@ public class Employee implements Serializable {
 
     @Override
     public String toString() {
-        return "com.sss.wc.entity.Patient[ id=" + id + " ]";
+        String name = "";
+        String sc = "";
+        if (this.nameOfEmployee != null) {
+            name = this.nameOfEmployee;
+        }
+        if (this.salaryCode != null) {
+            sc = this.salaryCode.toString();
+        }
+        if ((name + sc).equals("")) {
+            return "com.sss.wc.entity.Patient[ id=" + id + " ]";
+        }else{
+            return name + " " + salaryCode ;
+        }
     }
 
     public String getNic() {

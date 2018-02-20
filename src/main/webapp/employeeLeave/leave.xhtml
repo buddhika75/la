@@ -1,0 +1,79 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://java.sun.com/jsf/facelets"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:f="http://java.sun.com/jsf/core"
+      xmlns:p="http://primefaces.org/ui">
+
+    <body>
+
+        <ui:composition template="./../template.xhtml">
+
+            <ui:define name="title">
+                Leave
+            </ui:define>
+
+            <ui:define name="body">
+                
+                <f:view>
+
+
+                    <h:form>
+                        <h1><h:outputText value="Create/Edit"/></h1>
+                        <p:panelGrid columns="2">
+                            <p:outputLabel value="Employee:" for="employee" />
+                            <p:autoComplete id="employee" 
+                                            value="#{employeeLeaveController.selected.employee}"
+                                            completeMethod="#{employeeController.completeEmployee}"
+                                            var="e"
+                                            itemLabel="#{e.nameOfEmployee}"
+                                            itemValue="#{e}">
+                                <p:column headerText="Name" >
+                                    <p:outputLabel value="#{e.nameOfEmployee}" ></p:outputLabel>
+                                </p:column>
+                                 <p:column headerText="Salary Code" >
+                                    <p:outputLabel value="#{e.salaryCode}" ></p:outputLabel>
+                                </p:column>
+                            </p:autoComplete>
+                            <p:outputLabel value="LeaveFrom:" for="leaveFrom" />
+                            <p:calendar id="leaveFrom" value="#{employeeLeaveController.selected.leaveFrom}" 
+                                        title="LeaveFrom" pattern="dd/MM/yyyy"
+                                        >
+                                <f:ajax event="dateSelect" execute="leaveFrom" render="leaveTo leaveDays" 
+                                        listener="#{employeeLeaveController.leaveDatesChanged()}" ></f:ajax>
+                            </p:calendar>
+                            <p:outputLabel value="LeaveTo:" for="leaveTo" />
+                            <p:calendar id="leaveTo" value="#{employeeLeaveController.selected.leaveTo}"
+                                        title="LeaveTo" pattern="dd/MM/yyyy" 
+                                        >
+                                <f:ajax event="dateSelect" execute="leaveTo" render="leaveFrom leaveDays" 
+                                        listener="#{employeeLeaveController.leaveDatesChanged()}" ></f:ajax>
+                            </p:calendar>
+                            <p:outputLabel value="LeaveDays:" for="leaveDays" />
+                            <p:inputText id="leaveDays" value="#{employeeLeaveController.selected.leaveDays}" title="LeaveDays" />
+                            
+                            <p:outputLabel value="LeaveType:" for="leaveType" />
+                            <p:selectOneMenu id="leaveType" value="#{employeeLeaveController.selected.leaveType}" 
+                                             title="LeaveType" >
+                                <f:selectItem itemLabel="Select" ></f:selectItem>
+                                <f:selectItems value="#{enumController.leaveTypes}" ></f:selectItems>
+                            </p:selectOneMenu>
+                            
+                            <p:commandButton id="btnSave" value="Save" process="employee leaveFrom leaveTo leaveDays leaveType btnSave" 
+                                             update="employee leaveFrom leaveTo leaveDays leaveType" ajax="false"
+                                             action="#{employeeLeaveController.saveLeave()}" >
+                            </p:commandButton>
+                        </p:panelGrid>
+                    </h:form>
+                </f:view>
+
+                
+                
+                
+            </ui:define>
+
+        </ui:composition>
+
+    </body>
+</html>

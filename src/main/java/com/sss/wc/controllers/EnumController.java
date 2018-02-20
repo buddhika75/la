@@ -9,6 +9,7 @@ import javax.faces.bean.ApplicationScoped;
 import javax.inject.Named;
 import com.sss.wc.enums.Gender;
 import com.sss.wc.enums.ItemType;
+import com.sss.wc.enums.LeaveType;
 
 /**
  *
@@ -32,4 +33,8 @@ public class EnumController {
         return ItemType.values();
     }
 
+    public LeaveType[] getLeaveTypes(){
+        return LeaveType.values();
+    }
+    
 }
