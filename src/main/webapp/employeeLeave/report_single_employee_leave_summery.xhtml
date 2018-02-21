@@ -43,16 +43,22 @@
                                         >
                             </p:calendar>
                         </p:panelGrid>
-                        <p:commandButton ajax="false" action="#{employeeLeaveController.listSelectedEmployeeLeaveSummery()}"
-                                         value="Process" ></p:commandButton>
-                        
-                        
-                        <p:dataTable value="#{employeeLeaveController.leaveSummerries}" var="s" >
+                        <p:panelGrid columns="3" >
+                            <p:commandButton ajax="false" action="#{employeeLeaveController.listSelectedEmployeeLeaveSummery()}"
+                                             value="Process" ></p:commandButton>
+                            <p:commandButton ajax="false" value="Excel" >
+                                <p:dataExporter target="tbl" type="xls" fileName="All Employee Summery" ></p:dataExporter>
+                            </p:commandButton>
+                            <p:commandButton ajax="false" value="Print" >
+                                <p:printer target="tbl" ></p:printer>
+                            </p:commandButton>
+                        </p:panelGrid>
+                        <p:dataTable id="tbl" value="#{employeeLeaveController.leaveSummerries}" var="s" >
                             <p:column headerText="Leave Type" >
                                 <p:outputLabel value="#{s.leaveType}" ></p:outputLabel>
                             </p:column>
-                             <p:column headerText="Days" >
-                                 <p:outputLabel value="#{s.leaveDays}" ></p:outputLabel>
+                            <p:column headerText="Days" >
+                                <p:outputLabel value="#{s.leaveDays}" ></p:outputLabel>
                             </p:column>
                         </p:dataTable>
                     </p:panel>
