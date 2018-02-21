@@ -33,12 +33,51 @@ public class EmployeeLeaveController implements Serializable {
     @EJB
     private com.sss.wc.facades.EmployeeLeaveFacade ejbFacade;
     private List<EmployeeLeave> items = null;
+    private List<EmployeeLeave> selectedItems = null;
     private EmployeeLeave selected;
     List<LeaveSummery> leaveSummerries;
     private LeaveSummery leaveSummeryTotal;
     Employee employee;
     private Date fromDate;
     private Date toDate;
+
+    public void listSelectedEmployeeLeaveData() {
+        String j;
+        Map m = new HashMap();
+        j = "select l "
+                + " from EmployeeLeave l "
+                + " where l.employee=:emp "
+                + " and l.leaveFrom between :fd and :td "
+                + " order by l.leaveFrom";
+        m.put("emp", employee);
+        m.put("fd", fromDate);
+        m.put("td", toDate);
+        selectedItems = getFacade().findBySQL(j, m);
+
+    }
+
+    public String toSearchEmployeeLeave() {
+        selectedItems = new ArrayList<EmployeeLeave>();
+        return "/employeeLeave/search_leave";
+    }
+
+    public String toViewEmployeeLeave() {
+        if (selected == null) {
+            JsfUtil.addErrorMessage("Select a leave");
+            return "";
+        }
+        return "/employeeLeave/leave";
+    }
+
+    public String deleteEmployeeLeave() {
+        if (selected == null) {
+            JsfUtil.addErrorMessage("Select a leave");
+            return "";
+        }
+        getFacade().remove(selected);
+        JsfUtil.addSuccessMessage("Leave Deleted");
+        return toSearchEmployeeLeave();
+    }
 
     public void listSelectedEmployeeLeaveSummery() {
         String j;
@@ -89,12 +128,12 @@ public class EmployeeLeaveController implements Serializable {
         }
         for (LeaveSummery tls : temLeaveSummerries) {
             boolean summeryForEmployeeExists = false;
-            for(LeaveSummery ls:leaveSummerries){
-                if(ls.getEmployee().equals(tls.getEmployee())){
+            for (LeaveSummery ls : leaveSummerries) {
+                if (ls.getEmployee().equals(tls.getEmployee())) {
                     summeryForEmployeeExists = true;
                 }
             }
-            if(!summeryForEmployeeExists){
+            if (!summeryForEmployeeExists) {
                 LeaveSummery nls = new LeaveSummery();
                 nls.setEmployee(tls.getEmployee());
                 nls.setAnnualDays(0.0);
@@ -108,22 +147,35 @@ public class EmployeeLeaveController implements Serializable {
             }
         }
         for (LeaveSummery tls : temLeaveSummerries) {
-            for(LeaveSummery ls:leaveSummerries){
-                if(ls.getEmployee().equals(tls.getEmployee())){
-                    switch (tls.getLeaveType()){
-                        case Annual_Leave : ls.setAnnualDays(ls.getAnnualDays() + tls.getLeaveDays()); break;
-                        case Casual_Leave:ls.setCasualDays(ls.getCasualDays() + tls.getLeaveDays()); break;
-                        case Duty_Leave:ls.setDutyDays(ls.getDutyDays() + tls.getLeaveDays()); break;
-                        case Foreign_Leave:ls.setForeignDays(ls.getForeignDays() + tls.getLeaveDays()); break;
-                        case Maternity_Leave:ls.setMaternityDays(ls.getMaternityDays() + tls.getLeaveDays()); break;
-                        case Sick_Leave:ls.setSickDays(ls.getSickDays() + tls.getLeaveDays()); break;
-                        case Other_Leave:ls.setOtherDays(ls.getOtherDays() + tls.getLeaveDays()); break;
+            for (LeaveSummery ls : leaveSummerries) {
+                if (ls.getEmployee().equals(tls.getEmployee())) {
+                    switch (tls.getLeaveType()) {
+                        case Annual_Leave:
+                            ls.setAnnualDays(ls.getAnnualDays() + tls.getLeaveDays());
+                            break;
+                        case Casual_Leave:
+                            ls.setCasualDays(ls.getCasualDays() + tls.getLeaveDays());
+                            break;
+                        case Duty_Leave:
+                            ls.setDutyDays(ls.getDutyDays() + tls.getLeaveDays());
+                            break;
+                        case Foreign_Leave:
+                            ls.setForeignDays(ls.getForeignDays() + tls.getLeaveDays());
+                            break;
+                        case Maternity_Leave:
+                            ls.setMaternityDays(ls.getMaternityDays() + tls.getLeaveDays());
+                            break;
+                        case Sick_Leave:
+                            ls.setSickDays(ls.getSickDays() + tls.getLeaveDays());
+                            break;
+                        case Other_Leave:
+                            ls.setOtherDays(ls.getOtherDays() + tls.getLeaveDays());
+                            break;
                     }
                 }
             }
         }
-        
-        
+
     }
 
     public String toAddNewEmployeeLeave() {
@@ -136,31 +188,12 @@ public class EmployeeLeaveController implements Serializable {
             return;
         }
         if (selected.getLeaveTo() == null) {
-            Calendar c = Calendar.getInstance();
-            c.setTime(selected.getLeaveFrom());
-            c.set(Calendar.HOUR_OF_DAY, 23);
-            c.set(Calendar.MINUTE, 59);
-            c.set(Calendar.SECOND, 59);
-            c.set(Calendar.MILLISECOND, 999);
-            selected.setLeaveTo(c.getTime());
+            return;
         }
         Long days;
         days = (selected.getLeaveTo().getTime() - selected.getLeaveFrom().getTime()) / (1000 * 60 * 60 * 24);
-        if (days > 1) {
-            days++;
-            selected.setLeaveDays(days.doubleValue());
-            return;
-        }
-        Long hours;
-        hours = (selected.getLeaveTo().getTime() - selected.getLeaveFrom().getTime());
-        Double dblHours = hours.doubleValue() / (1000 * 60 * 60);
-
-        if (dblHours < 4.1) {
-            selected.setLeaveDays(0.5);
-        } else {
-            selected.setLeaveDays(1.0);
-        }
-
+        days += 1;
+        selected.setLeaveDays(days.doubleValue());
     }
 
     public String saveLeave() {
@@ -341,6 +374,14 @@ public class EmployeeLeaveController implements Serializable {
 
     public void setToDate(Date toDate) {
         this.toDate = toDate;
+    }
+
+    public List<EmployeeLeave> getSelectedItems() {
+        return selectedItems;
+    }
+
+    public void setSelectedItems(List<EmployeeLeave> selectedItems) {
+        this.selectedItems = selectedItems;
     }
 
     @FacesConverter(forClass = EmployeeLeave.class)

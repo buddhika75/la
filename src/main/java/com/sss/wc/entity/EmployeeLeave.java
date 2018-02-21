@@ -59,10 +59,6 @@ public class EmployeeLeave implements Serializable {
     public Date getLeaveFrom() {
         if(leaveFrom==null){
             Calendar c = Calendar.getInstance();
-            c.set(Calendar.HOUR, 0);
-            c.set(Calendar.MINUTE,0);
-            c.set(Calendar.SECOND, 0);
-            c.set(Calendar.MILLISECOND, 1);
             leaveFrom = c.getTime();
         }
         return leaveFrom;
@@ -73,6 +69,10 @@ public class EmployeeLeave implements Serializable {
     }
 
     public Date getLeaveTo() {
+        if(leaveTo==null){
+            Calendar c =Calendar.getInstance();
+            leaveTo = c.getTime();
+        }
         return leaveTo;
     }
 

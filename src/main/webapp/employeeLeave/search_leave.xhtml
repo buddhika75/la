@@ -1,0 +1,119 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://java.sun.com/jsf/facelets"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:f="http://java.sun.com/jsf/core"
+      xmlns:p="http://primefaces.org/ui">
+
+    <ui:composition template="/template.xhtml">
+
+
+        <ui:define name="title">
+            <h:outputText value="#{bundleLeave.ListEmployeeLeaveTitle}"></h:outputText>
+        </ui:define>
+
+        <ui:define name="body">
+            <h:form id="EmployeeLeaveListForm">
+                <p:panelGrid columns="3" >
+                    <p:outputLabel value="Employee" ></p:outputLabel>
+                    <p:autoComplete id="employee" 
+                                    value="#{employeeLeaveController.employee}"
+                                    completeMethod="#{employeeController.completeEmployee}"
+                                    var="e"
+                                    itemLabel="#{e.nameOfEmployee}"
+                                    itemValue="#{e}">
+                        <p:column headerText="Name" >
+                            <p:outputLabel value="#{e.nameOfEmployee}" ></p:outputLabel>
+                        </p:column>
+                        <p:column headerText="Salary Code" >
+                            <p:outputLabel value="#{e.salaryCode}" ></p:outputLabel>
+                        </p:column>
+                    </p:autoComplete>
+                    <p:commandButton value="Search" ajax="false" 
+                                     action="#{employeeLeaveController.listSelectedEmployeeLeaveData()}" ></p:commandButton>
+
+                    <p:outputLabel value="LeaveFrom:" for="leaveFrom" />
+                    <p:calendar id="leaveFrom" value="#{employeeLeaveController.fromDate}" 
+                                title="LeaveFrom" pattern="dd/MM/yyyy"
+                                >
+                    </p:calendar>
+                    <p:spacer></p:spacer>
+
+                    <p:outputLabel value="LeaveTo:" for="leaveTo" />
+                    <p:calendar id="leaveTo" value="#{employeeLeaveController.toDate}"
+                                title="LeaveTo" pattern="dd/MM/yyyy" 
+                                >
+                    </p:calendar>
+                    <p:spacer ></p:spacer>
+
+                </p:panelGrid>
+                <p:panel header="#{bundleLeave.ListEmployeeLeaveTitle}">
+                    <p:dataTable id="datalist" value="#{employeeLeaveController.selectedItems}" var="item"
+                                 selectionMode="single" selection="#{employeeLeaveController.selected}"
+                                 paginator="true"
+                                 rowKey="#{item.id}"
+                                 rows="10"
+                                 rowsPerPageTemplate="10,20,30,40,50"
+                                 >
+
+
+                        <p:column>
+                            <f:facet name="header">
+                                <h:outputText value="#{bundleLeave.ListEmployeeLeaveTitle_employee}"/>
+                            </f:facet>
+                            <h:outputText value="#{item.employee}"/>
+                        </p:column>
+                        <p:column>
+                            <f:facet name="header">
+                                <h:outputText value="#{bundleLeave.ListEmployeeLeaveTitle_leaveFrom}"/>
+                            </f:facet>
+                            <h:outputText value="#{item.leaveFrom}">
+                                <f:convertDateTime pattern="dd/MMMM/yyyy" />
+                            </h:outputText>
+                        </p:column>
+                        <p:column>
+                            <f:facet name="header">
+                                <h:outputText value="#{bundleLeave.ListEmployeeLeaveTitle_leaveTo}"/>
+                            </f:facet>
+                            <h:outputText value="#{item.leaveTo}">
+                                <f:convertDateTime pattern="dd/MMMM/yyyy" />
+                            </h:outputText>
+                        </p:column>
+                        <p:column>
+                            <f:facet name="header">
+                                <h:outputText value="#{bundleLeave.ListEmployeeLeaveTitle_leaveDays}"/>
+                            </f:facet>
+                            <h:outputText value="#{item.leaveDays}"/>
+                        </p:column>
+                        <p:column>
+                            <f:facet name="header">
+                                <h:outputText value="#{bundleLeave.ListEmployeeLeaveTitle_leaveType}"/>
+                            </f:facet>
+                            <h:outputText value="#{item.leaveType}"/>
+                        </p:column>
+                        <p:column>
+                            <f:facet name="header">
+                                <h:outputText value="Actions"/>
+                            </f:facet>
+                            <p:commandButton ajax="false" value="Edit" 
+                                             action="#{employeeLeaveController.toViewEmployeeLeave()}" >
+                                <f:setPropertyActionListener value="#{item}" target="#{employeeLeaveController.selected}" ></f:setPropertyActionListener>
+                            </p:commandButton>
+                            <p:commandButton ajax="false" value="Delete" 
+                                             action="#{employeeLeaveController.deleteEmployeeLeave()}" >
+                                <f:setPropertyActionListener value="#{item}" target="#{employeeLeaveController.selected}" ></f:setPropertyActionListener>
+                            </p:commandButton>
+                        </p:column>
+
+                    </p:dataTable>
+                </p:panel>
+            </h:form>
+
+            <ui:include src="Create.xhtml"/>
+            <ui:include src="Edit.xhtml"/>
+            <ui:include src="View.xhtml"/>
+        </ui:define>
+    </ui:composition>
+
+</html>

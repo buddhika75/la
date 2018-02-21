@@ -34,7 +34,7 @@
                         </p:submenu>
                         <p:submenu label="Leave" >
                             <p:menuitem value="Add Leave" action="#{employeeLeaveController.toAddNewEmployeeLeave()}" ajax="false" />
-                            <p:menuitem value="Manage Leave" action="#{employeeController.toAddNewEmployee()}" ajax="false" />
+                            <p:menuitem value="Manage Leave" action="#{employeeLeaveController.toSearchEmployeeLeave()}" ajax="false" />
                         </p:submenu>
                         <p:submenu label="Reports" >
                             <p:menuitem value="Individual Summery" action="/employeeLeave/report_single_employee_leave_summery" ajax="false" />
@@ -52,7 +52,7 @@
                             <p:menuitem value="Users" outcome="/webUser/index.xhtml"  disabled ="#{!webUserController.canManage_User}"/>
                         </p:submenu>
 
-                        
+
 
 
                     </p:menubar>
@@ -99,7 +99,7 @@
                         </h:form>
                     </p:panel>
 
-                   
+
 
                     <h:panelGroup rendered="#{webUserController.loggedUser ne null}" >
                         <ui:insert name="body"> </ui:insert>

@@ -47,7 +47,7 @@
                             <p:calendar id="leaveTo" value="#{employeeLeaveController.selected.leaveTo}"
                                         title="LeaveTo" pattern="dd/MM/yyyy" 
                                         >
-                                <f:ajax event="dateSelect" execute="leaveTo" render="leaveFrom leaveDays" 
+                                <f:ajax event="dateSelect" execute="leaveTo" render="leaveDays" 
                                         listener="#{employeeLeaveController.leaveDatesChanged()}" ></f:ajax>
                             </p:calendar>
                             <p:outputLabel value="LeaveDays:" for="leaveDays" />

@@ -57,6 +57,8 @@ public class EmployeeController implements Serializable {
         return getFacade().findBySQL(j, m);
     }
     
+  
+    
     public String toAddNewEmployee() {
         selected = new Employee();
         selected.setDateOfTransferToCurrentStation(new Date());
