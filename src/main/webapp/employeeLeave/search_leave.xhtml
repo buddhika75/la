@@ -15,7 +15,7 @@
 
         <ui:define name="body">
             <h:form id="EmployeeLeaveListForm">
-                <p:panelGrid columns="3" >
+                <p:panelGrid columns="2" >
                     <p:outputLabel value="Employee" ></p:outputLabel>
                     <p:autoComplete id="employee" 
                                     value="#{employeeLeaveController.employee}"
@@ -30,24 +30,35 @@
                             <p:outputLabel value="#{e.salaryCode}" ></p:outputLabel>
                         </p:column>
                     </p:autoComplete>
-                    <p:commandButton value="Search" ajax="false" 
-                                     action="#{employeeLeaveController.listSelectedEmployeeLeaveData()}" ></p:commandButton>
+
 
                     <p:outputLabel value="LeaveFrom:" for="leaveFrom" />
                     <p:calendar id="leaveFrom" value="#{employeeLeaveController.fromDate}" 
                                 title="LeaveFrom" pattern="dd/MM/yyyy"
                                 >
                     </p:calendar>
-                    <p:spacer></p:spacer>
-
+                   
                     <p:outputLabel value="LeaveTo:" for="leaveTo" />
                     <p:calendar id="leaveTo" value="#{employeeLeaveController.toDate}"
                                 title="LeaveTo" pattern="dd/MM/yyyy" 
                                 >
                     </p:calendar>
-                    <p:spacer ></p:spacer>
-
+                   
                 </p:panelGrid>
+
+                <p:panelGrid columns="3" >
+                    <p:commandButton value="Search" ajax="false" 
+                                     action="#{employeeLeaveController.listSelectedEmployeeLeaveData()}" ></p:commandButton>
+
+
+                    <p:commandButton ajax="false" value="Excel" >
+                        <p:dataExporter target="datalist" type="xls" fileName="All Employee Summery" ></p:dataExporter>
+                    </p:commandButton>
+                    <p:commandButton ajax="false" value="Print" >
+                        <p:printer target="datalist" ></p:printer>
+                    </p:commandButton>
+                </p:panelGrid>
+
                 <p:panel header="#{bundleLeave.ListEmployeeLeaveTitle}">
                     <p:dataTable id="datalist" value="#{employeeLeaveController.selectedItems}" var="item"
                                  selectionMode="single" selection="#{employeeLeaveController.selected}"

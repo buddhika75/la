@@ -18,33 +18,41 @@
                 <p:panel header="#{bundlePt.ListPatientTitle}">
                     <p:dataTable id="datalist" value="#{employeeController.items}" var="item"
                                  selectionMode="single" selection="#{employeeController.selected}"
-                                 paginator="true"
+                                 paginator="true" rowIndexVar="i"
                                  rowKey="#{item.id}"
-                                 rows="10"
-                                 rowsPerPageTemplate="10,20,30,40,50"
+                                 rows="20"
+                                 rowsPerPageTemplate="20,50,100"
                                  >
 
                         <p:ajax event="rowSelect"   update="createButton viewButton editButton deleteButton"/>
                         <p:ajax event="rowUnselect" update="createButton viewButton editButton deleteButton"/>
 
 
-                        <p:column>
-                            <f:facet name="header">
-                                <h:outputText value="Name"/>
-                            </f:facet>
+                        <p:column headerText="No" >
+                            <h:outputText value="#{i+1}"/>
+                        </p:column>
+                        <p:column headerText="Name" sortBy="#{item.nameOfEmployee}" filterBy="#{item.nameOfEmployee}">
                             <h:outputText value="#{item.nameOfEmployee}"/>
                         </p:column>
-                        <p:column>
-                            <f:facet name="header">
-                                <h:outputText value="NIC"/>
-                            </f:facet>
+                        <p:column  headerText="NIC" sortBy="#{item.nic}" filterBy="#{item.nic}">
                             <h:outputText value="#{item.nic}"/>
+                        </p:column>
+                        <p:column  headerText="Salary Code" sortBy="#{item.salaryCode}" filterBy="#{item.salaryCode}">
+                            <h:outputText value="#{item.salaryCode}">
+                            </h:outputText>
+                        </p:column>
+                        <p:column  headerText="Employee Category" sortBy="#{item.nameOfEmployee}" filterBy="#{item.nameOfEmployee}">
+                            <f:facet name="header">
+                                <h:outputText value="Employee Number"/>
+                            </f:facet>
+                            <h:outputText value="#{item.employeeType}">
+                            </h:outputText>
                         </p:column>
                         <p:column>
                             <f:facet name="header">
-                                <h:outputText value="Salary Code"/>
+                                <h:outputText value="Category"/>
                             </f:facet>
-                            <h:outputText value="#{item.salaryCode}">
+                            <h:outputText value="#{item.employeeType}">
                             </h:outputText>
                         </p:column>
                         <p:column>

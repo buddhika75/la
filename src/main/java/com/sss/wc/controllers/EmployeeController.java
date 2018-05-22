@@ -179,6 +179,11 @@ public class EmployeeController implements Serializable {
         return getFacade().findAll();
     }
 
+    
+    
+    
+    
+    
     @FacesConverter(forClass = Employee.class)
     public static class PatientControllerConverter implements Converter {
 

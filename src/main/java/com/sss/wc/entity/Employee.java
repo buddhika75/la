@@ -5,10 +5,14 @@
  */
 package com.sss.wc.entity;
 
+import com.sss.wc.enums.CivilStatus;
+import com.sss.wc.enums.EmployeeType;
 import com.sss.wc.enums.Gender;
 import java.io.Serializable;
 import java.util.Date;
 import javax.persistence.Entity;
+import javax.persistence.EnumType;
+import javax.persistence.Enumerated;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
@@ -32,6 +36,8 @@ public class Employee implements Serializable {
     Date dateOfTransferToCurrentStation;
     String referenceNumber;
     String nameOfEmployee;
+    @Lob
+    String fullName;
 
     @ManyToOne
     Institute registeredInstitute;
@@ -46,6 +52,7 @@ public class Employee implements Serializable {
     String contactNumber;
     private String nic;
     private Long salaryCode;
+    Long empNumber;
     @ManyToOne
     Item designation;
 
@@ -54,6 +61,54 @@ public class Employee implements Serializable {
     private Date activeFrom;
     @Temporal(javax.persistence.TemporalType.DATE)
     private Date activeTo;
+
+    @Temporal(javax.persistence.TemporalType.DATE)
+    Date dateOfFirstAppointment;
+    @Temporal(javax.persistence.TemporalType.DATE)
+    Date dateOfPermanentLetter;
+    String numberOfPermanentLetter;
+    @Temporal(javax.persistence.TemporalType.DATE)
+    Date dateOfCurrentDesignation;
+    @Temporal(javax.persistence.TemporalType.DATE)
+    Date dateForGradeTwo;
+    @Temporal(javax.persistence.TemporalType.DATE)
+    Date deteOfGradeOne;
+    @Temporal(javax.persistence.TemporalType.DATE)
+    Date dateOfSpecialGrade;
+    @Temporal(javax.persistence.TemporalType.DATE)
+    Date dateOfSuperGrade;
+    @Temporal(javax.persistence.TemporalType.DATE)
+    Date dateOfCurrentStation;
+    @Temporal(javax.persistence.TemporalType.DATE)
+    Date dateOfTransferFromCurrentStation;
+    @Enumerated(EnumType.STRING)
+    CivilStatus civilstatus;
+    Integer noChi;
+    @Temporal(javax.persistence.TemporalType.DATE)
+    Date dobOfChild1;
+    @Temporal(javax.persistence.TemporalType.DATE)
+    Date dobOfChild2;
+    @Temporal(javax.persistence.TemporalType.DATE)
+    Date dobOfChild3;
+    @Temporal(javax.persistence.TemporalType.DATE)
+    Date dobOfChild4;
+    @Temporal(javax.persistence.TemporalType.DATE)
+    Date dobOfChild5;
+    @Temporal(javax.persistence.TemporalType.DATE)
+    Date dobOfChild6;
+    @Temporal(javax.persistence.TemporalType.DATE)
+    Date dobOfChild7;
+    @Temporal(javax.persistence.TemporalType.DATE)
+    Date dobOfChild8;
+    @Temporal(javax.persistence.TemporalType.DATE)
+    Date dobOfChild9;
+    @Temporal(javax.persistence.TemporalType.DATE)
+    Date dobOfChild10;
+    
+    @Lob
+    String other;
+    @Enumerated(EnumType.STRING)
+    EmployeeType employeeType;
 
     public Long getId() {
         return id;
@@ -151,15 +206,215 @@ public class Employee implements Serializable {
         this.designation = designation;
     }
 
-    
-    
-    
     @Override
     public int hashCode() {
         int hash = 0;
         hash += (id != null ? id.hashCode() : 0);
         return hash;
     }
+
+    public String getFullName() {
+        return fullName;
+    }
+
+    public void setFullName(String fullName) {
+        this.fullName = fullName;
+    }
+
+    public Date getDateOfFirstAppointment() {
+        return dateOfFirstAppointment;
+    }
+
+    public void setDateOfFirstAppointment(Date dateOfFirstAppointment) {
+        this.dateOfFirstAppointment = dateOfFirstAppointment;
+    }
+
+    public Date getDateOfPermanentLetter() {
+        return dateOfPermanentLetter;
+    }
+
+    public void setDateOfPermanentLetter(Date dateOfPermanentLetter) {
+        this.dateOfPermanentLetter = dateOfPermanentLetter;
+    }
+
+    public String getNumberOfPermanentLetter() {
+        return numberOfPermanentLetter;
+    }
+
+    public void setNumberOfPermanentLetter(String numberOfPermanentLetter) {
+        this.numberOfPermanentLetter = numberOfPermanentLetter;
+    }
+
+    public Date getDateOfCurrentDesignation() {
+        return dateOfCurrentDesignation;
+    }
+
+    public void setDateOfCurrentDesignation(Date dateOfCurrentDesignation) {
+        this.dateOfCurrentDesignation = dateOfCurrentDesignation;
+    }
+
+    public Date getDateForGradeTwo() {
+        return dateForGradeTwo;
+    }
+
+    public void setDateForGradeTwo(Date dateForGradeTwo) {
+        this.dateForGradeTwo = dateForGradeTwo;
+    }
+
+    public Date getDeteOfGradeOne() {
+        return deteOfGradeOne;
+    }
+
+    public void setDeteOfGradeOne(Date deteOfGradeOne) {
+        this.deteOfGradeOne = deteOfGradeOne;
+    }
+
+    public Date getDateOfSpecialGrade() {
+        return dateOfSpecialGrade;
+    }
+
+    public void setDateOfSpecialGrade(Date dateOfSpecialGrade) {
+        this.dateOfSpecialGrade = dateOfSpecialGrade;
+    }
+
+    public Date getDateOfSuperGrade() {
+        return dateOfSuperGrade;
+    }
+
+    public void setDateOfSuperGrade(Date dateOfSuperGrade) {
+        this.dateOfSuperGrade = dateOfSuperGrade;
+    }
+
+    public Date getDateOfCurrentStation() {
+        return dateOfCurrentStation;
+    }
+
+    public void setDateOfCurrentStation(Date dateOfCurrentStation) {
+        this.dateOfCurrentStation = dateOfCurrentStation;
+    }
+
+    public Date getDateOfTransferFromCurrentStation() {
+        return dateOfTransferFromCurrentStation;
+    }
+
+    public void setDateOfTransferFromCurrentStation(Date dateOfTransferFromCurrentStation) {
+        this.dateOfTransferFromCurrentStation = dateOfTransferFromCurrentStation;
+    }
+
+    public CivilStatus getCivilstatus() {
+        return civilstatus;
+    }
+
+    public void setCivilstatus(CivilStatus civilstatus) {
+        this.civilstatus = civilstatus;
+    }
+
+    public Integer getNoChi() {
+        return noChi;
+    }
+
+    public void setNoChi(Integer noChi) {
+        this.noChi = noChi;
+    }
+
+    public Date getDobOfChild1() {
+        return dobOfChild1;
+    }
+
+    public void setDobOfChild1(Date dobOfChild1) {
+        this.dobOfChild1 = dobOfChild1;
+    }
+
+    public Date getDobOfChild2() {
+        return dobOfChild2;
+    }
+
+    public void setDobOfChild2(Date dobOfChild2) {
+        this.dobOfChild2 = dobOfChild2;
+    }
+
+    public Date getDobOfChild3() {
+        return dobOfChild3;
+    }
+
+    public void setDobOfChild3(Date dobOfChild3) {
+        this.dobOfChild3 = dobOfChild3;
+    }
+
+    public Date getDobOfChild4() {
+        return dobOfChild4;
+    }
+
+    public void setDobOfChild4(Date dobOfChild4) {
+        this.dobOfChild4 = dobOfChild4;
+    }
+
+    public Date getDobOfChild5() {
+        return dobOfChild5;
+    }
+
+    public void setDobOfChild5(Date dobOfChild5) {
+        this.dobOfChild5 = dobOfChild5;
+    }
+
+    public Date getDobOfChild6() {
+        return dobOfChild6;
+    }
+
+    public void setDobOfChild6(Date dobOfChild6) {
+        this.dobOfChild6 = dobOfChild6;
+    }
+
+    public Date getDobOfChild7() {
+        return dobOfChild7;
+    }
+
+    public void setDobOfChild7(Date dobOfChild7) {
+        this.dobOfChild7 = dobOfChild7;
+    }
+
+    public Date getDobOfChild8() {
+        return dobOfChild8;
+    }
+
+    public void setDobOfChild8(Date dobOfChild8) {
+        this.dobOfChild8 = dobOfChild8;
+    }
+
+    public Date getDobOfChild9() {
+        return dobOfChild9;
+    }
+
+    public void setDobOfChild9(Date dobOfChild9) {
+        this.dobOfChild9 = dobOfChild9;
+    }
+
+    public Date getDobOfChild10() {
+        return dobOfChild10;
+    }
+
+    public void setDobOfChild10(Date dobOfChild10) {
+        this.dobOfChild10 = dobOfChild10;
+    }
+
+    public String getOther() {
+        return other;
+    }
+
+    public void setOther(String other) {
+        this.other = other;
+    }
+
+    public EmployeeType getEmployeeType() {
+        return employeeType;
+    }
+
+    public void setEmployeeType(EmployeeType employeeType) {
+        this.employeeType = employeeType;
+    }
+    
+    
+    
 
     @Override
     public boolean equals(Object object) {
@@ -186,8 +441,8 @@ public class Employee implements Serializable {
         }
         if ((name + sc).equals("")) {
             return "com.sss.wc.entity.Patient[ id=" + id + " ]";
-        }else{
-            return name + " " + salaryCode ;
+        } else {
+            return name + " " + salaryCode;
         }
     }
 
@@ -230,5 +485,15 @@ public class Employee implements Serializable {
     public void setActiveTo(Date activeTo) {
         this.activeTo = activeTo;
     }
+
+    public Long getEmpNumber() {
+        return empNumber;
+    }
+
+    public void setEmpNumber(Long empNumber) {
+        this.empNumber = empNumber;
+    }
+
+
 
 }

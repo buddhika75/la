@@ -5,6 +5,8 @@
  */
 package com.sss.wc.controllers;
 
+import com.sss.wc.enums.CivilStatus;
+import com.sss.wc.enums.EmployeeType;
 import javax.faces.bean.ApplicationScoped;
 import javax.inject.Named;
 import com.sss.wc.enums.Gender;
@@ -30,16 +32,24 @@ public class EnumController {
         return Gender.values();
     }
 
-    public ItemType[] getItemTypes(){
+    public ItemType[] getItemTypes() {
         return ItemType.values();
     }
 
-    public LeaveType[] getLeaveTypes(){
+    public LeaveType[] getLeaveTypes() {
         return LeaveType.values();
     }
-    
-       public Privilege[] getPrivileges() {
+
+    public Privilege[] getPrivileges() {
         return Privilege.values();
     }
-    
+
+    public CivilStatus[] getCivilStatuses() {
+        return CivilStatus.values();
+    }
+
+    public EmployeeType[] getEmployeeTypes() {
+        return EmployeeType.values();
+    }
+
 }

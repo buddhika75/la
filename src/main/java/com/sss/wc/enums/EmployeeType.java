@@ -9,12 +9,8 @@ package com.sss.wc.enums;
  *
  * @author server
  */
-public enum UlcerType {
-    Venous_Ulcer,
-    Neuropathic_Ulcer,
-    Neuroischaemic_Ulcer,
-    Ischaemic_Ulcer,
-    Vasculitis,
-    Infections,
+public enum EmployeeType {
+    Major_Staff,
+    Minor_Staff,
     Other,
 }

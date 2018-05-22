@@ -47,6 +47,21 @@ public class ItemController implements Serializable {
         }
         return ti;
     }
+
+
+    public List<Item> findItems(String name,ItemType type){
+        String jpql;
+        Map m = new HashMap();
+        jpql = "select i from Item i where lower(i.name) like :n and i.itemCategory = :cat";
+        m.put("n", "%" + name.toLowerCase() + "%");
+        m.put("cat", type);
+        return getFacade().findBySQL(jpql, m);
+    }
+
+    public List<Item> completeDesignations(String name){
+        return findItems(name, ItemType.Designation);
+    }
+    
     
     
     public ItemController() {

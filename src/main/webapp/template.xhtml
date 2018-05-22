@@ -34,9 +34,9 @@
                         </p:submenu>
                         <p:submenu label="Leave" >
                             <p:menuitem value="Add Leave" action="#{employeeLeaveController.toAddNewEmployeeLeave()}" ajax="false" />
-                            <p:menuitem value="Manage Leave" action="#{employeeLeaveController.toSearchEmployeeLeave()}" ajax="false" />
                         </p:submenu>
                         <p:submenu label="Reports" >
+                            <p:menuitem value="Individual Leave Details" action="#{employeeLeaveController.toSearchEmployeeLeave()}" ajax="false" />
                             <p:menuitem value="Individual Summery" action="/employeeLeave/report_single_employee_leave_summery" ajax="false" />
                             <p:menuitem value="All Employee Summery" action="/employeeLeave/report_all_employee_leave_summery" ajax="false" />
                         </p:submenu>
@@ -49,6 +49,8 @@
                             <p:menuitem value="Institute" outcome="/institute/List.xhtml"  disabled ="#{!webUserController.canManage_Institutions}"/>
                             <p:menuitem value="Department" outcome="/department/List.xhtml"  disabled ="#{!webUserController.canManage_Departments}"/>
                             <p:menuitem value="Users" outcome="/webUser/index.xhtml"  disabled ="#{!webUserController.canManage_User}"/>
+                            <p:menuitem value="Data Administration" outcome="/data_admin.xhtml"  disabled ="#{!webUserController.canManage_User}"/>
+
                         </p:submenu>
 
 
