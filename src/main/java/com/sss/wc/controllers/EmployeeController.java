@@ -23,21 +23,29 @@ import javax.faces.convert.Converter;
 import javax.faces.convert.FacesConverter;
 import javax.inject.Inject;
 
+import org.primefaces.model.chart.Axis;
+import org.primefaces.model.chart.AxisType;
+import org.primefaces.model.chart.CategoryAxis;
+import org.primefaces.model.chart.LineChartModel;
+import org.primefaces.model.chart.ChartSeries;
+import org.primefaces.model.chart.LineChartSeries;
+
 @Named
 @SessionScoped
 public class EmployeeController implements Serializable {
 
+    
     @Inject
     WebUserController webUserController;
 
+    private LineChartModel lineModel1;
+    private LineChartModel lineModel2;
+    
     @EJB
     private com.sss.wc.facades.EmployeeFacade ejbFacade;
     private List<Employee> items = null;
     private Employee selected;
 
-  
-    
-    
     
     public EmployeeController() {
     }
@@ -46,6 +54,14 @@ public class EmployeeController implements Serializable {
         return webUserController;
     }
 
+    
+    public void removeSpacesInNames(){
+        List<Employee> es = getFacade().findAll();
+        for(Employee e:es){
+            e.setNameOfEmployee(e.getNameOfEmployee().trim().replaceAll(" +", " "));
+            getFacade().edit(e);
+        }
+    }
     
     public List<Employee> completeEmployee(String qry){
         String j;
@@ -179,9 +195,6 @@ public class EmployeeController implements Serializable {
         return getFacade().findAll();
     }
 
-    
-    
-    
     
     
     @FacesConverter(forClass = Employee.class)

@@ -15,6 +15,11 @@
 
         <ui:define name="body">
             <h:form id="PatientListForm">
+                
+                
+                <p:commandButton value="Remove Extra Spaces" action="#{employeeController.removeSpacesInNames()}" 
+                                 ajax="false"></p:commandButton>
+                
                 <p:panel header="#{bundlePt.ListPatientTitle}">
                     <p:dataTable id="datalist" value="#{employeeController.items}" var="item"
                                  selectionMode="single" selection="#{employeeController.selected}"
