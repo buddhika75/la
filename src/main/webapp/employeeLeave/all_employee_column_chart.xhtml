@@ -11,12 +11,12 @@
         <ui:composition template="./../template.xhtml">
 
             <ui:define name="title">
-                All Employee Leave Summery
+                All Employee Leave Column Chart
             </ui:define>
 
             <ui:define name="body">
                 <h:form >
-                    <p:panel header="All Employee Leave Summery" >
+                    <p:panel header="All Employee Column Chart" >
                         <p:panelGrid columns="2" >
                             <p:outputLabel value="LeaveFrom:" for="leaveFrom" />
                             <p:calendar id="leaveFrom" value="#{employeeLeaveController.fromDate}" 
@@ -30,7 +30,7 @@
                             </p:calendar>
                         </p:panelGrid>
                         <p:panelGrid columns="3" >
-                            <p:commandButton ajax="false" action="#{employeeLeaveController.listAllEmployeeLeaveSummery() }"
+                            <p:commandButton ajax="false" action="#{employeeLeaveController.listAllEmployeeLeaveColumnChart()}"
                                              value="Process" ></p:commandButton>
                             <p:commandButton ajax="false" value="Excel" >
                                 <p:dataExporter target="tbl" type="xls" fileName="All Employee Summery" ></p:dataExporter>
@@ -40,7 +40,7 @@
                             </p:commandButton>
                         </p:panelGrid>
 
-
+                        <p:chart type="bar" rendered="#{employeeLeaveController.barModel ne null}" model="#{employeeLeaveController.barModel}" style="height:300px"/>
 
                         <p:dataTable id="tbl" value="#{employeeLeaveController.leaveSummerries}" var="s" >
                             <p:column headerText="Employee" >

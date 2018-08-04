@@ -17,7 +17,7 @@
             <h:form id="PatientListForm">
                 
                 
-                <p:commandButton value="Remove Extra Spaces" action="#{employeeController.removeSpacesInNames()}" 
+                <p:commandButton rendered="false" value="Remove Extra Spaces" action="#{employeeController.removeSpacesInNames}" 
                                  ajax="false"></p:commandButton>
                 
                 <p:panel header="#{bundlePt.ListPatientTitle}">

@@ -38,9 +38,7 @@ public class EmployeeController implements Serializable {
     @Inject
     WebUserController webUserController;
 
-    private LineChartModel lineModel1;
-    private LineChartModel lineModel2;
-    
+  
     @EJB
     private com.sss.wc.facades.EmployeeFacade ejbFacade;
     private List<Employee> items = null;
@@ -58,8 +56,10 @@ public class EmployeeController implements Serializable {
     public void removeSpacesInNames(){
         List<Employee> es = getFacade().findAll();
         for(Employee e:es){
+            System.out.println("e.getNameOfEmployee() = " + e.getNameOfEmployee());
             e.setNameOfEmployee(e.getNameOfEmployee().trim().replaceAll(" +", " "));
             getFacade().edit(e);
+            System.out.println("e.getNameOfEmployee() = " + e.getNameOfEmployee());
         }
     }
     

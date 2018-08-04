@@ -109,6 +109,11 @@ public class Employee implements Serializable {
     String other;
     @Enumerated(EnumType.STRING)
     EmployeeType employeeType;
+    
+    @ManyToOne
+    private Department department;
+    
+    
 
     public Long getId() {
         return id;
@@ -492,6 +497,14 @@ public class Employee implements Serializable {
 
     public void setEmpNumber(Long empNumber) {
         this.empNumber = empNumber;
+    }
+
+    public Department getDepartment() {
+        return department;
+    }
+
+    public void setDepartment(Department department) {
+        this.department = department;
     }
 
 

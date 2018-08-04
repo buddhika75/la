@@ -31,6 +31,11 @@ import org.primefaces.model.chart.CategoryAxis;
 import org.primefaces.model.chart.ChartSeries;
 import org.primefaces.model.chart.LineChartModel;
 import org.primefaces.model.chart.LineChartSeries;
+import org.primefaces.model.chart.Axis;
+import org.primefaces.model.chart.AxisType;
+import org.primefaces.model.chart.BarChartModel;
+import org.primefaces.model.chart.HorizontalBarChartModel;
+import org.primefaces.model.chart.ChartSeries;
 
 @Named("employeeLeaveController")
 @SessionScoped
@@ -49,6 +54,46 @@ public class EmployeeLeaveController implements Serializable {
 
     private LineChartModel lineModel1;
     private LineChartModel lineModel2;
+    private BarChartModel barModel;
+
+    private BarChartModel initBarModel(List<LeaveSummery> lss) {
+        BarChartModel model = new BarChartModel();
+
+        ChartSeries annual = new ChartSeries();
+        ChartSeries casual = new ChartSeries();
+        ChartSeries sick = new ChartSeries();
+        ChartSeries maternity = new ChartSeries();
+        ChartSeries foreign = new ChartSeries();
+        ChartSeries duty = new ChartSeries();
+        ChartSeries other = new ChartSeries();
+
+        annual.setLabel("Annual");
+        casual.setLabel("Casual");
+        sick.setLabel("Sick");
+        maternity.setLabel("Maternity");
+        foreign.setLabel("Foreign");
+        duty.setLabel("Duty");
+        other.setLabel("Other");
+
+        for (LeaveSummery s : lss) {
+            annual.set(s.getEmployee().getNameOfEmployee(), s.getAnnualDays());
+            casual.set(s.getEmployee().getNameOfEmployee(), s.getCasualDays());
+            sick.set(s.getEmployee().getNameOfEmployee(), s.getSickDays());
+            maternity.set(s.getEmployee().getNameOfEmployee(), s.getMaternityDays());
+            duty.set(s.getEmployee().getNameOfEmployee(), s.getDutyDays());
+            other.set(s.getEmployee().getNameOfEmployee(), s.getOtherDays());
+        }
+
+        model.addSeries(annual);
+        model.addSeries(casual);
+        model.addSeries(sick);
+        model.addSeries(maternity);
+        model.addSeries(duty);
+        model.addSeries(other);
+
+        return model;
+    }
+
 
     private void createLineModels() {
         lineModel1 = initLinearModel();
@@ -95,11 +140,10 @@ public class EmployeeLeaveController implements Serializable {
 
         return model;
     }
-    
-    
+
     private LineChartModel initCategoryModel() {
         LineChartModel model = new LineChartModel();
- 
+
         ChartSeries boys = new ChartSeries();
         boys.setLabel("Boys");
         boys.set("2004", 120);
@@ -107,7 +151,7 @@ public class EmployeeLeaveController implements Serializable {
         boys.set("2006", 44);
         boys.set("2007", 150);
         boys.set("2008", 25);
- 
+
         ChartSeries girls = new ChartSeries();
         girls.setLabel("Girls");
         girls.set("2004", 52);
@@ -115,14 +159,12 @@ public class EmployeeLeaveController implements Serializable {
         girls.set("2006", 110);
         girls.set("2007", 90);
         girls.set("2008", 120);
- 
+
         model.addSeries(boys);
         model.addSeries(girls);
-         
+
         return model;
     }
-    
-    
 
     public void listSelectedEmployeeLeaveData() {
         String j;
@@ -185,6 +227,95 @@ public class EmployeeLeaveController implements Serializable {
                 leaveSummeryTotal.setLeaveDays(leaveSummeryTotal.getLeaveDays() + ls.getLeaveDays());
             }
         }
+
+    }
+
+    public void listAllEmployeeLeaveColumnChart() {
+        String j;
+        Map m = new HashMap();
+        j = "select new com.sss.wc.enums.LeaveSummery(l.employee, sum(l.leaveDays), l.leaveType) "
+                + " from EmployeeLeave l "
+                + " where l.leaveFrom between :fd and :td "
+                + " group by l.leaveType, l.employee";
+        List<Object> temLst;
+        m.put("fd", fromDate);
+        m.put("td", toDate);
+
+        temLst = getFacade().findGroupingBySql(j, m);
+        List<LeaveSummery> temLeaveSummerries = new ArrayList<LeaveSummery>();
+        leaveSummerries = new ArrayList<LeaveSummery>();
+
+        for (Object o : temLst) {
+            if (o instanceof LeaveSummery) {
+                LeaveSummery ls = (LeaveSummery) o;
+                temLeaveSummerries.add(ls);
+            }
+        }
+        for (LeaveSummery tls : temLeaveSummerries) {
+            boolean summeryForEmployeeExists = false;
+            for (LeaveSummery ls : leaveSummerries) {
+                if (ls.getEmployee().equals(tls.getEmployee())) {
+                    summeryForEmployeeExists = true;
+                }
+            }
+            if (!summeryForEmployeeExists) {
+                LeaveSummery nls = new LeaveSummery();
+                nls.setEmployee(tls.getEmployee());
+                nls.setAnnualDays(0.0);
+                nls.setCasualDays(0.0);
+                nls.setDutyDays(0.0);
+                nls.setForeignDays(0.0);
+                nls.setMaternityDays(0.0);
+                nls.setOtherDays(0.0);
+                nls.setSickDays(0.0);
+                leaveSummerries.add(nls);
+            }
+        }
+        for (LeaveSummery tls : temLeaveSummerries) {
+            for (LeaveSummery ls : leaveSummerries) {
+                if (ls.getEmployee().equals(tls.getEmployee())) {
+                    switch (tls.getLeaveType()) {
+                        case Annual_Leave:
+                            ls.setAnnualDays(ls.getAnnualDays() + tls.getLeaveDays());
+                            break;
+                        case Casual_Leave:
+                            ls.setCasualDays(ls.getCasualDays() + tls.getLeaveDays());
+                            break;
+                        case Duty_Leave:
+                            ls.setDutyDays(ls.getDutyDays() + tls.getLeaveDays());
+                            break;
+                        case Foreign_Leave:
+                            ls.setForeignDays(ls.getForeignDays() + tls.getLeaveDays());
+                            break;
+                        case Maternity_Leave:
+                            ls.setMaternityDays(ls.getMaternityDays() + tls.getLeaveDays());
+                            break;
+                        case Sick_Leave:
+                            ls.setSickDays(ls.getSickDays() + tls.getLeaveDays());
+                            break;
+                        case Other_Leave:
+                            ls.setOtherDays(ls.getOtherDays() + tls.getLeaveDays());
+                            break;
+                    }
+                }
+            }
+        }
+        
+        
+        barModel = initBarModel(temLeaveSummerries);
+
+        barModel.setTitle("Leave Summery Chart");
+        barModel.setLegendPosition("ne");
+
+        Axis xAxis = barModel.getAxis(AxisType.X);
+        xAxis.setLabel("Leave Type");
+
+        Axis yAxis = barModel.getAxis(AxisType.Y);
+        yAxis.setLabel("Employee");
+        
+        yAxis.setMin(0);
+        yAxis.setMax(50);
+        
 
     }
 
@@ -465,6 +596,30 @@ public class EmployeeLeaveController implements Serializable {
 
     public void setSelectedItems(List<EmployeeLeave> selectedItems) {
         this.selectedItems = selectedItems;
+    }
+
+    public LineChartModel getLineModel1() {
+        return lineModel1;
+    }
+
+    public void setLineModel1(LineChartModel lineModel1) {
+        this.lineModel1 = lineModel1;
+    }
+
+    public LineChartModel getLineModel2() {
+        return lineModel2;
+    }
+
+    public void setLineModel2(LineChartModel lineModel2) {
+        this.lineModel2 = lineModel2;
+    }
+
+    public BarChartModel getBarModel() {
+        return barModel;
+    }
+
+    public void setBarModel(BarChartModel barModel) {
+        this.barModel = barModel;
     }
 
     @FacesConverter(forClass = EmployeeLeave.class)
