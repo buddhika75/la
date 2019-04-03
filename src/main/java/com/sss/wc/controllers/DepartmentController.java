@@ -3,9 +3,12 @@ package com.sss.wc.controllers;
 import com.sss.wc.entity.Department;
 import com.sss.wc.controllers.util.JsfUtil;
 import com.sss.wc.controllers.util.JsfUtil.PersistAction;
+import com.sss.wc.entity.Institute;
 import com.sss.wc.facades.DepartmentFacade;
 
 import java.io.Serializable;
+import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 import java.util.ResourceBundle;
@@ -89,6 +92,17 @@ public class DepartmentController implements Serializable {
             selected = null; // Remove selection
             items = null;    // Invalidate list of items to trigger re-query.
         }
+    }
+
+    public List<Department> getInstituteDepartments(Institute ins) {
+        List<Department> deps = new ArrayList<Department>();
+        if (ins != null) {
+            String j = "Select d from Department d where d.institute= :ins order by d.name";
+            Map m = new HashMap();
+            m.put("ins", ins);
+            deps = getFacade().findBySQL(j, m);
+        }
+        return deps;
     }
 
     public List<Department> getItems(String jpql) {

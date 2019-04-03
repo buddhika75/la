@@ -6,6 +6,7 @@ import com.sss.wc.controllers.util.JsfUtil.PersistAction;
 import com.sss.wc.facades.InstituteFacade;
 
 import java.io.Serializable;
+import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 import java.util.ResourceBundle;
@@ -144,6 +145,13 @@ public class InstituteController implements Serializable {
 
     public List<Institute> getItemsAvailableSelectOne() {
         return getFacade().findAll();
+    }
+
+    public List<Institute> completeInstitutes(String qry) {
+        String j = "Select i from Institute i where lower(i.name) like :n order by i.name";
+        Map m = new HashMap();
+        m.put("n", "%" + qry.trim().toLowerCase() + "%");
+        return getFacade().findBySQL(j, m);
     }
 
     @FacesConverter(forClass = Institute.class)

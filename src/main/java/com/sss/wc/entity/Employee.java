@@ -64,6 +64,9 @@ public class Employee implements Serializable {
 
     @Temporal(javax.persistence.TemporalType.DATE)
     Date dateOfFirstAppointment;
+    private String letterOfFirstAppointment;
+    @Temporal(javax.persistence.TemporalType.DATE)
+    private Date letterDateOfFirstAppointment;
     @Temporal(javax.persistence.TemporalType.DATE)
     Date dateOfPermanentLetter;
     String numberOfPermanentLetter;
@@ -104,16 +107,16 @@ public class Employee implements Serializable {
     Date dobOfChild9;
     @Temporal(javax.persistence.TemporalType.DATE)
     Date dobOfChild10;
-    
+
     @Lob
     String other;
     @Enumerated(EnumType.STRING)
     EmployeeType employeeType;
-    
+
     @ManyToOne
     private Department department;
-    
-    
+    @ManyToOne
+    private Institute institute;
 
     public Long getId() {
         return id;
@@ -123,6 +126,8 @@ public class Employee implements Serializable {
         this.id = id;
     }
 
+    
+    
     public Date getDateOfTransferToCurrentStation() {
         return dateOfTransferToCurrentStation;
     }
@@ -417,9 +422,6 @@ public class Employee implements Serializable {
     public void setEmployeeType(EmployeeType employeeType) {
         this.employeeType = employeeType;
     }
-    
-    
-    
 
     @Override
     public boolean equals(Object object) {
@@ -507,6 +509,28 @@ public class Employee implements Serializable {
         this.department = department;
     }
 
+    public Institute getInstitute() {
+        return institute;
+    }
 
+    public void setInstitute(Institute institute) {
+        this.institute = institute;
+    }
+
+    public String getLetterOfFirstAppointment() {
+        return letterOfFirstAppointment;
+    }
+
+    public void setLetterOfFirstAppointment(String letterOfFirstAppointment) {
+        this.letterOfFirstAppointment = letterOfFirstAppointment;
+    }
+
+    public Date getLetterDateOfFirstAppointment() {
+        return letterDateOfFirstAppointment;
+    }
+
+    public void setLetterDateOfFirstAppointment(Date letterDateOfFirstAppointment) {
+        this.letterDateOfFirstAppointment = letterDateOfFirstAppointment;
+    }
 
 }

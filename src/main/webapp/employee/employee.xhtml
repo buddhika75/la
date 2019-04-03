@@ -31,18 +31,62 @@
                                 <p:outputLabel value="Name:" for="nameOfPatient" />
                                 <p:inputText required="true" id="nameOfPatient"
                                              style="width: 300px;" 
-                                             value="#{employeeController.selected.nameOfEmployee}" title="Name" />
+                                             value="#{employeeController.selected.nameOfEmployee}" title="Name with initials" />
 
 
                                 <p:outputLabel value="Full Name:" for="fullName" />
                                 <p:inputTextarea required="true" id="fullName"
                                                  style="width: 300px;"
                                                  value="#{employeeController.selected.fullName}" 
-                                                 title="Fulll Name" />
+                                                 title="Name denoted by initials" />
 
+                                <p:outputLabel value="Institute:" />
+                                <p:autoComplete value="#{employeeController.selected.institute}" 
+                                                completeMethod="#{instituteController.completeInstitutes}" var="i" itemLabel="#{i.name}" itemValue="#{i}" >
+                                </p:autoComplete>
+
+                                <p:outputLabel value="Position:" for="designation" />
+                                <p:autoComplete id="designation" value="#{employeeController.selected.designation}"
+                                                completeMethod="#{itemController.completeDesignations}"
+                                                var="d" itemLabel="#{d.name}"
+                                                itemValue="#{d}">
+                                </p:autoComplete>
+
+                                <p:outputLabel value="Gender:" for="gender" />
+                                <p:selectOneButton id="gender" value="#{employeeController.selected.gender}"  label="Gender" >
+                                    <f:selectItems value="#{enumController.genders}" ></f:selectItems>
+                                </p:selectOneButton>
 
                                 <p:outputLabel value="NIC:" for="nic" />
                                 <p:inputText id="nic" value="#{employeeController.selected.nic}" title="ClinicNumber" />
+
+                                <p:outputLabel value="Appointment Date:" />
+                                <p:calendar pattern="dd MMMM yyyy" navigator="true" id="dateOfFirstAppointment" value="#{employeeController.selected.dateOfFirstAppointment}" title="DateOfFirstAppointment" >
+                                </p:calendar>
+
+
+                                <p:outputLabel value="Number of appointment letter "  />
+                                <p:inputText required="true" 
+                                             style="width: 300px;" 
+                                             value="#{employeeController.selected.letterOfFirstAppointment}" title="Number of appointment letter" />
+
+                                <p:outputLabel value="Date of appointment letter "  />
+                                <p:calendar pattern="dd MMMM yyyy" navigator="true" id="dateOfFirstAppointmentLetter" value="#{employeeController.selected.letterDateOfFirstAppointment}" title="Date of appointment letter" >
+                                </p:calendar>
+
+                                <p:outputLabel value="Confirmation date :" for="dateOfPermanentLetter" />
+                                <p:calendar pattern="dd MMMM yyyy" navigator="true" pattern="dd MMMM yyyy"
+                                            id="dateOfPermanentLetter" value="#{employeeController.selected.dateOfPermanentLetter}" title="Confirmation date " >
+                                </p:calendar>
+
+
+
+
+
+
+
+
+
 
                                 <p:outputLabel value="Date of Birth:" for="dateOfBirth" />
                                 <p:calendar
@@ -50,10 +94,6 @@
                                     navigator="true" id="dateOfBirth" pattern="dd MM yyyy" value="#{employeeController.selected.dateOfBirth}" title="DateOfBirth"  >
                                 </p:calendar>
 
-                                <p:outputLabel value="Gender:" for="gender" />
-                                <p:selectOneButton id="gender" value="#{employeeController.selected.gender}"  label="Gender" >
-                                    <f:selectItems value="#{enumController.genders}" ></f:selectItems>
-                                </p:selectOneButton>
 
                                 <p:outputLabel value="Salary Code:" for="sc" />
                                 <p:inputText id="sc" value="#{employeeController.selected.salaryCode}" title="Salary Code" />
@@ -76,64 +116,44 @@
 
 
                                 <p:outputLabel value="DateOfTransferToCurrentStation:" for="dateOfTransferToCurrentStation" />
-                                <p:inputText id="dateOfTransferToCurrentStation" value="#{employeeController.selected.dateOfTransferToCurrentStation}" title="DateOfTransferToCurrentStation" >
-                                    <f:convertDateTime pattern="MM/dd/yyyy" />
-                                </p:inputText>
-
-
-                                <p:outputLabel value="Designation:" for="designation" />
-                                <p:autoComplete id="designation" value="#{employeeController.selected.designation}"
-                                                completeMethod="#{itemController.completeDesignations}"
-                                                var="d" itemLabel="#{d.name}"
-                                                itemValue="#{d}">
-                                </p:autoComplete>
-
-                                <p:outputLabel value="Date of First Appointment:" for="dateOfFirstAppointment" />
-                                <p:calendar pattern="dd MMMM yyyy" navigator="true" id="dateOfFirstAppointment" value="#{employeeController.selected.dateOfFirstAppointment}" title="DateOfFirstAppointment" >
-                                    <f:convertDateTime pattern="MM/dd/yyyy" />
+                                <p:calendar id="dateOfTransferToCurrentStation" pattern="dd MMMM yyyy"
+                                            value="#{employeeController.selected.dateOfTransferToCurrentStation}" title="DateOfTransferToCurrentStation" >
                                 </p:calendar>
 
-                                <p:outputLabel value="Date of Permanent Letter:" for="dateOfPermanentLetter" />
-                                <p:calendar pattern="dd MMMM yyyy" navigator="true"  id="dateOfPermanentLetter" value="#{employeeController.selected.dateOfPermanentLetter}" title="DateOfPermanentLetter" >
-                                    <f:convertDateTime pattern="MM/dd/yyyy" />
-                                </p:calendar>
+
+
+
+
 
                                 <p:outputLabel value="Number of Permanent Letter:" for="numberOfPermanentLetter" />
                                 <p:inputText id="numberOfPermanentLetter" value="#{employeeController.selected.numberOfPermanentLetter}" title="NumberOfPermanentLetter" />
 
                                 <p:outputLabel value="Date of Current Designation:" for="dateOfCurrentDesignation" />
                                 <p:calendar pattern="dd MMMM yyyy" navigator="true"  id="dateOfCurrentDesignation" value="#{employeeController.selected.dateOfCurrentDesignation}" title="DateOfCurrentDesignation" >
-                                    <f:convertDateTime pattern="MM/dd/yyyy" />
                                 </p:calendar>
 
                                 <p:outputLabel value="Date For Grade Two:" for="dateForGradeTwo" />
                                 <p:calendar pattern="dd MMMM yyyy" navigator="true"  id="dateForGradeTwo" value="#{employeeController.selected.dateForGradeTwo}" title="DateForGradeTwo" >
-                                    <f:convertDateTime pattern="MM/dd/yyyy" />
                                 </p:calendar>
 
                                 <p:outputLabel value="Dete of GradeOne:" for="deteOfGradeOne" />
                                 <p:calendar pattern="dd MMMM yyyy" navigator="true"  id="deteOfGradeOne" value="#{employeeController.selected.deteOfGradeOne}" title="DeteOfGradeOne" >
-                                    <f:convertDateTime pattern="MM/dd/yyyy" />
                                 </p:calendar>
 
                                 <p:outputLabel value="Date of Special Grade:" for="dateOfSpecialGrade" />
                                 <p:calendar pattern="dd MMMM yyyy" navigator="true"  id="dateOfSpecialGrade" value="#{employeeController.selected.dateOfSpecialGrade}" title="DateOfSpecialGrade" >
-                                    <f:convertDateTime pattern="MM/dd/yyyy" />
                                 </p:calendar>
 
                                 <p:outputLabel value="Date of Super Grade:" for="dateOfSuperGrade" />
                                 <p:calendar pattern="dd MMMM yyyy" navigator="true"  id="dateOfSuperGrade" value="#{employeeController.selected.dateOfSuperGrade}" title="DateOfSuperGrade" >
-                                    <f:convertDateTime pattern="MM/dd/yyyy" />
                                 </p:calendar>
 
                                 <p:outputLabel value="Date of Current Station:" for="dateOfCurrentStation" />
                                 <p:calendar pattern="dd MMMM yyyy" navigator="true"  id="dateOfCurrentStation" value="#{employeeController.selected.dateOfCurrentStation}" title="DateOfCurrentStation" >
-                                    <f:convertDateTime pattern="MM/dd/yyyy" />
                                 </p:calendar>
 
                                 <p:outputLabel value="Date of Transfer From Current Station:" for="dateOfTransferFromCurrentStation" />
                                 <p:calendar pattern="dd MMMM yyyy" navigator="true"  id="dateOfTransferFromCurrentStation" value="#{employeeController.selected.dateOfTransferFromCurrentStation}" title="DateOfTransferFromCurrentStation" >
-                                    <f:convertDateTime pattern="MM/dd/yyyy" />
                                 </p:calendar>
 
                                 <p:outputLabel value="Civilstatus:" for="civilstatus" />
@@ -157,7 +177,6 @@
                                                 </td>
                                                 <td>
                                                     <p:calendar pattern="dd MMMM yyyy" navigator="true"  id="dobOfChild1" value="#{employeeController.selected.dobOfChild1}" title="DobOfChild1" >
-                                                        <f:convertDateTime pattern="MM/dd/yyyy" />
                                                     </p:calendar>
                                                 </td>
                                             </tr>
@@ -170,7 +189,6 @@
                                                         <p:calendar pattern="dd MMMM yyyy" navigator="true"  
                                                                     id="dobOfChild2" 
                                                                     value="#{employeeController.selected.dobOfChild2}" >
-                                                            <f:convertDateTime pattern="MM/dd/yyyy" />
                                                         </p:calendar>
                                                     </td>
                                                 </tr>
@@ -184,7 +202,6 @@
                                                     <td>
                                                         <p:calendar pattern="dd MMMM yyyy" navigator="true"  
                                                                     value="#{employeeController.selected.dobOfChild3}" >
-                                                            <f:convertDateTime pattern="MM/dd/yyyy" />
                                                         </p:calendar>
                                                     </td>
                                                 </tr>
@@ -198,7 +215,6 @@
                                                     <td>
                                                         <p:calendar pattern="dd MMMM yyyy" navigator="true"  
                                                                     value="#{employeeController.selected.dobOfChild4}" >
-                                                            <f:convertDateTime pattern="MM/dd/yyyy" />
                                                         </p:calendar>
                                                     </td>
                                                 </tr>
@@ -212,7 +228,6 @@
                                                     <td>
                                                         <p:calendar pattern="dd MMMM yyyy" navigator="true"  
                                                                     value="#{employeeController.selected.dobOfChild5}" >
-                                                            <f:convertDateTime pattern="MM/dd/yyyy" />
                                                         </p:calendar>
                                                     </td>
                                                 </tr>
@@ -226,7 +241,6 @@
                                                     <td>
                                                         <p:calendar pattern="dd MMMM yyyy" navigator="true"  
                                                                     value="#{employeeController.selected.dobOfChild6}" >
-                                                            <f:convertDateTime pattern="MM/dd/yyyy" />
                                                         </p:calendar>
                                                     </td>
                                                 </tr>
