@@ -36,7 +36,7 @@
                         <p:column headerText="No" >
                             <h:outputText value="#{i+1}"/>
                         </p:column>
-                        <p:column headerText="Name" sortBy="#{item.nameOfEmployee}" filterBy="#{item.nameOfEmployee}">
+                        <p:column headerText="Name" sortBy="#{item.nameOfEmployee}" filterBy="#{item.nameOfEmployee}" filterMatchMode="contains">
                             <h:outputText value="#{item.nameOfEmployee}"/>
                         </p:column>
                         <p:column  headerText="NIC" sortBy="#{item.nic}" filterBy="#{item.nic}">

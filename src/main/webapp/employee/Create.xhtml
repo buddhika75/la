@@ -38,7 +38,7 @@
                             <p:outputLabel value="Salary Code:" for="sc" />
                             <p:inputText id="sc" value="#{employeeController.selected.salaryCode}" title="Salary Code" />
 
-                            <p:outputLabel value="Employee No." for="en" />
+                            <p:outputLabel value="Personal File No." for="en" />
                             <p:inputText id="en" value="#{employeeController.selected.empNumber}" title="Employee Number" />
 
 
@@ -80,14 +80,12 @@
                                 <f:convertDateTime pattern="MM/dd/yyyy" />
                             </p:calendar>
 
-                            <p:outputLabel value="Date of Permanent Letter:" for="dateOfPermanentLetter" />
+                            <p:outputLabel value="Date of Confirmation:" for="dateOfPermanentLetter" />
                             <p:calendar pattern="dd MMMM yyyy" navigator="true"  id="dateOfPermanentLetter" value="#{employeeController.selected.dateOfPermanentLetter}" title="DateOfPermanentLetter" >
                                 <f:convertDateTime pattern="MM/dd/yyyy" />
                             </p:calendar>
 
-                            <p:outputLabel value="Number of Permanent Letter:" for="numberOfPermanentLetter" />
-                            <p:inputText id="numberOfPermanentLetter" value="#{employeeController.selected.numberOfPermanentLetter}" title="NumberOfPermanentLetter" />
-
+                            
                             <p:outputLabel value="Date of Current Designation:" for="dateOfCurrentDesignation" />
                             <p:calendar pattern="dd MMMM yyyy" navigator="true"  id="dateOfCurrentDesignation" value="#{employeeController.selected.dateOfCurrentDesignation}" title="DateOfCurrentDesignation" >
                                 <f:convertDateTime pattern="MM/dd/yyyy" />

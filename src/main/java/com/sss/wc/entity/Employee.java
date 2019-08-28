@@ -117,6 +117,19 @@ public class Employee implements Serializable {
     private Department department;
     @ManyToOne
     private Institute institute;
+    
+    
+    String wnopNo;
+
+    public String getWnopNo() {
+        return wnopNo;
+    }
+
+    public void setWnopNo(String wnopNo) {
+        this.wnopNo = wnopNo;
+    }
+    
+    
 
     public Long getId() {
         return id;
