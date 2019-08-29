@@ -55,6 +55,9 @@ public class Employee implements Serializable {
     Long empNumber;
     @ManyToOne
     Item designation;
+    
+    private Integer incrementMonth;
+    private Integer incrementDate;
 
     private Boolean active;
     @Temporal(javax.persistence.TemporalType.DATE)
@@ -119,7 +122,17 @@ public class Employee implements Serializable {
     private Institute institute;
     
     
+    @Temporal(javax.persistence.TemporalType.DATE)
+    private Date eb1;
+    @Temporal(javax.persistence.TemporalType.DATE)
+    private Date eb2;
+    @Temporal(javax.persistence.TemporalType.DATE)
+    private Date eb3;
+    
+    
     String wnopNo;
+    
+    
 
     public String getWnopNo() {
         return wnopNo;
@@ -544,6 +557,46 @@ public class Employee implements Serializable {
 
     public void setLetterDateOfFirstAppointment(Date letterDateOfFirstAppointment) {
         this.letterDateOfFirstAppointment = letterDateOfFirstAppointment;
+    }
+
+    public Integer getIncrementMonth() {
+        return incrementMonth;
+    }
+
+    public void setIncrementMonth(Integer incrementMonth) {
+        this.incrementMonth = incrementMonth;
+    }
+
+    public Integer getIncrementDate() {
+        return incrementDate;
+    }
+
+    public void setIncrementDate(Integer incrementDate) {
+        this.incrementDate = incrementDate;
+    }
+
+    public Date getEb1() {
+        return eb1;
+    }
+
+    public void setEb1(Date eb1) {
+        this.eb1 = eb1;
+    }
+
+    public Date getEb2() {
+        return eb2;
+    }
+
+    public void setEb2(Date eb2) {
+        this.eb2 = eb2;
+    }
+
+    public Date getEb3() {
+        return eb3;
+    }
+
+    public void setEb3(Date eb3) {
+        this.eb3 = eb3;
     }
 
 }

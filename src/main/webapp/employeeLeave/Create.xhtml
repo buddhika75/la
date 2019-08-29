@@ -21,9 +21,9 @@
                                            itemValue="#{employeeItem}"/>
                         </p:selectOneMenu>
                         <p:outputLabel value="#{bundleLeave.CreateEmployeeLeaveLabel_leaveFrom}" for="leaveFrom" />
-                        <p:calendar id="leaveFrom" pattern="MM/dd/yyyy HH:mm:ss" value="#{employeeLeaveController.selected.leaveFrom}" title="#{bundleLeave.EditEmployeeLeaveTitle_leaveFrom}"  showOn="button"/>
+                        <p:calendar id="leaveFrom" pattern="dd/MMMM/yyyy HH:mm:ss" value="#{employeeLeaveController.selected.leaveFrom}" title="#{bundleLeave.EditEmployeeLeaveTitle_leaveFrom}"  showOn="button"/>
                         <p:outputLabel value="#{bundleLeave.CreateEmployeeLeaveLabel_leaveTo}" for="leaveTo" />
-                        <p:calendar id="leaveTo" pattern="MM/dd/yyyy HH:mm:ss" value="#{employeeLeaveController.selected.leaveTo}" title="#{bundleLeave.EditEmployeeLeaveTitle_leaveTo}"  showOn="button"/>
+                        <p:calendar id="leaveTo" pattern="dd/MMMM/yyyy HH:mm:ss" value="#{employeeLeaveController.selected.leaveTo}" title="#{bundleLeave.EditEmployeeLeaveTitle_leaveTo}"  showOn="button"/>
                         <p:outputLabel value="#{bundleLeave.CreateEmployeeLeaveLabel_leaveDays}" for="leaveDays" />
                         <p:inputText id="leaveDays" value="#{employeeLeaveController.selected.leaveDays}" title="#{bundleLeave.CreateEmployeeLeaveTitle_leaveDays}" />
                         <p:outputLabel value="#{bundleLeave.CreateEmployeeLeaveLabel_leaveType}" for="leaveType" />

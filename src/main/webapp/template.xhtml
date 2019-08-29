@@ -66,13 +66,13 @@
             <p:layoutUnit position="south" >
                 <ui:insert name="footer">
                     <h:panelGrid columns="4" >
-                        <p:outputLabel value="&copy; Sunila Software Solutions" ></p:outputLabel>
+                        <p:outputLabel value="&copy; RDHS, Galle" ></p:outputLabel>
                         <h:panelGroup >
                             <p:spacer ></p:spacer>
                             |
                             <p:spacer ></p:spacer>
                         </h:panelGroup>
-                        <p:outputLabel rendered="#{webUserController.loggedUser ne null}" value="You are logged as #{webUserController.loggedUser.name} from #{webUserController.loggedDepartment} of #{webUserController.loggableInstitutes}." ></p:outputLabel>
+                        <p:outputLabel rendered="#{webUserController.loggedUser ne null}" value="You are logged as #{webUserController.loggedUser.name} from #{webUserController.loggedDepartment}." ></p:outputLabel>
                         <h:form >
                             <p:commandLink rendered="#{webUserController.loggedUser ne null}" value="Logout" ajax="false" action="#{webUserController.logOut()}" ></p:commandLink>
                         </h:form>
