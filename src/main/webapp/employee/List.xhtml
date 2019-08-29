@@ -33,7 +33,7 @@
                         <p:ajax event="rowUnselect" update="createButton viewButton editButton deleteButton"/>
 
 
-                        <p:column headerText="No" >
+                        <p:column headerText="No" width="30" >
                             <h:outputText value="#{i+1}"/>
                         </p:column>
                         <p:column headerText="Name" sortBy="#{item.nameOfEmployee}" filterBy="#{item.nameOfEmployee}" filterMatchMode="contains">
@@ -46,33 +46,28 @@
                             <h:outputText value="#{item.salaryCode}">
                             </h:outputText>
                         </p:column>
-                        <p:column  headerText="Employee Category" sortBy="#{item.nameOfEmployee}" filterBy="#{item.nameOfEmployee}">
-                            <f:facet name="header">
-                                <h:outputText value="Employee Number"/>
-                            </f:facet>
-                            <h:outputText value="#{item.employeeType}">
+                        <p:column  headerText="Designation" sortBy="#{item.designation.name}" 
+                                   filterBy="#{item.designation.name}"
+                                   filterMatchMode="contains">
+                            <h:outputText value="#{item.designation.name}">
                             </h:outputText>
                         </p:column>
-                        <p:column>
+                        <p:column sortBy="#{item.institute.name}" 
+                                   filterBy="#{item.institute.name}">
                             <f:facet name="header">
-                                <h:outputText value="Category"/>
+                                <h:outputText value="Institution"/>
                             </f:facet>
-                            <h:outputText value="#{item.employeeType}">
+                            <h:outputText value="#{item.institute.name}">
                             </h:outputText>
                         </p:column>
-                        <p:column>
+                        <p:column sortBy="#{item.gender}" 
+                                   filterBy="#{item.gender}">
                             <f:facet name="header">
                                 <h:outputText value="Gender"/>
                             </f:facet>
                             <h:outputText value="#{item.gender}"/>
                         </p:column>
-                        <p:column>
-                            <f:facet name="header">
-                                <h:outputText value="Designation"/>
-                            </f:facet>
-                            <h:outputText value="#{item.designation.name}"/>
-                        </p:column>
-                        <p:column>
+                        <p:column sortBy="#{item.dateOfBirth}">
                             <f:facet name="header">
                                 <h:outputText value="#{bundlePt.ListPatientTitle_dateOfBirth}"/>
                             </f:facet>
