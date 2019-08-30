@@ -176,7 +176,7 @@
                                 <p:outputLabel value="Designation:" for="designation" />
                                 <p:autoComplete id="designation" value="#{employeeController.selected.designation}"
                                                 completeMethod="#{itemController.completeDesignations}"
-                                                var="d" itemLabel="#{d.name}"
+                                                var="d" itemLabel="#{d.name}" forceSelection="true"
                                                 itemValue="#{d}">
                                 </p:autoComplete>
 

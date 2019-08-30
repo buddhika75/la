@@ -48,6 +48,8 @@
 
                         <p:submenu label="#{bundle.Maintenance}" rendered="#{webUserController.canManage_Institutions or webUserController.canManage_Departments or webUserController.canManage_Items or webUserController.canManage_User}">
                             <p:menuitem value="Institute" outcome="/institute/List.xhtml"  disabled ="#{!webUserController.canManage_Institutions}"/>
+                            <p:menuitem value="Items" outcome="/item/List.xhtml"  disabled ="#{!webUserController.canManage_Items}"/>
+                            
                             <p:menuitem value="Department" outcome="/department/List.xhtml"  disabled ="#{!webUserController.canManage_Departments}"/>
                             <p:menuitem value="Users" outcome="/webUser/index.xhtml"  disabled ="#{!webUserController.canManage_User}"/>
                             <p:menuitem value="Data Administration" outcome="/data_admin.xhtml"  disabled ="#{!webUserController.canManage_User}"/>
