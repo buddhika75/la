@@ -11,6 +11,17 @@
         <h:outputStylesheet library="css" name="jsfcrud.css"/>
         <h:outputStylesheet library="css" name="main.css" />
         <h:outputScript library="js" name="jsfcrud.js"/>
+        <!-- Global site tag (gtag.js) - Google Analytics -->
+        <script async="true" src="https://www.googletagmanager.com/gtag/js?id=UA-167559394-1"></script>
+        <script>
+            window.dataLayer = window.dataLayer || [];
+            function gtag() {
+                dataLayer.push(arguments);
+            }
+            gtag('js', new Date());
+
+            gtag('config', 'UA-167559394-1');
+        </script>
     </h:head>
 
     <h:body>
@@ -49,7 +60,7 @@
                         <p:submenu label="#{bundle.Maintenance}" rendered="#{webUserController.canManage_Institutions or webUserController.canManage_Departments or webUserController.canManage_Items or webUserController.canManage_User}">
                             <p:menuitem value="Institute" outcome="/institute/List.xhtml"  disabled ="#{!webUserController.canManage_Institutions}"/>
                             <p:menuitem value="Items" outcome="/item/List.xhtml"  disabled ="#{!webUserController.canManage_Items}"/>
-                            
+
                             <p:menuitem value="Department" outcome="/department/List.xhtml"  disabled ="#{!webUserController.canManage_Departments}"/>
                             <p:menuitem value="Users" outcome="/webUser/index.xhtml"  disabled ="#{!webUserController.canManage_User}"/>
                             <p:menuitem value="Data Administration" outcome="/data_admin.xhtml"  disabled ="#{!webUserController.canManage_User}"/>

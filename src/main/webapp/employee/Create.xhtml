@@ -70,7 +70,7 @@
                                                 </td>
                                                 <td>
                                                     <p:calendar pattern="dd MMMM yyyy" navigator="true"  id="dobOfChild1" value="#{employeeController.selected.dobOfChild1}" title="DobOfChild1" >
-                                                        
+
                                                     </p:calendar>
                                                 </td>
                                             </tr>
@@ -83,7 +83,7 @@
                                                         <p:calendar pattern="dd MMMM yyyy" navigator="true"  
                                                                     id="dobOfChild2" 
                                                                     value="#{employeeController.selected.dobOfChild2}" >
-                                                            
+
                                                         </p:calendar>
                                                     </td>
                                                 </tr>
@@ -97,7 +97,7 @@
                                                     <td>
                                                         <p:calendar pattern="dd MMMM yyyy" navigator="true"  
                                                                     value="#{employeeController.selected.dobOfChild3}" >
-                                                            
+
                                                         </p:calendar>
                                                     </td>
                                                 </tr>
@@ -111,7 +111,7 @@
                                                     <td>
                                                         <p:calendar pattern="dd MMMM yyyy" navigator="true"  
                                                                     value="#{employeeController.selected.dobOfChild4}" >
-                                                            
+
                                                         </p:calendar>
                                                     </td>
                                                 </tr>
@@ -125,7 +125,7 @@
                                                     <td>
                                                         <p:calendar pattern="dd MMMM yyyy" navigator="true"  
                                                                     value="#{employeeController.selected.dobOfChild5}" >
-                                                            
+
                                                         </p:calendar>
                                                     </td>
                                                 </tr>
@@ -139,7 +139,7 @@
                                                     <td>
                                                         <p:calendar pattern="dd MMMM yyyy" navigator="true"  
                                                                     value="#{employeeController.selected.dobOfChild6}" >
-                                                            
+
                                                         </p:calendar>
                                                     </td>
                                                 </tr>
@@ -180,6 +180,12 @@
                                 </p:autoComplete>
 
 
+                                <p:outputLabel value="Institution" for="ins" />
+                                <p:autoComplete id="ins" value="#{employeeController.selected.institute}"
+                                                completeMethod="#{instituteController.completeInstitutes}"
+                                                var="i" itemLabel="#{i.name}"
+                                                itemValue="#{i}">
+                                </p:autoComplete>
 
 
 
@@ -187,7 +193,7 @@
 
                                 <p:outputLabel value="Date of Confirmation:" for="dateOfPermanentLetter" />
                                 <p:calendar pattern="dd MMMM yyyy" navigator="true"  id="dateOfPermanentLetter" value="#{employeeController.selected.dateOfPermanentLetter}" title="DateOfPermanentLetter" >
-                                    
+
                                 </p:calendar>
 
                                 <p:outputLabel value="Date of Increment:" />
@@ -207,7 +213,7 @@
                                         <f:selectItem itemLabel="December" itemValue="11" ></f:selectItem>
                                     </p:selectOneMenu>
 
-                                    <p:selectOneMenu value="#{employeeController.selected.incrementMonth}" >
+                                    <p:selectOneMenu value="#{employeeController.selected.incrementDate}" >
                                         <f:selectItem itemLabel="1" itemValue="0" ></f:selectItem>
                                         <f:selectItem itemLabel="2" itemValue="1" ></f:selectItem>
                                         <f:selectItem itemLabel="3" itemValue="2" ></f:selectItem>
@@ -250,51 +256,51 @@
 
                                 <p:outputLabel value="Date of First Appointment:" for="dateOfFirstAppointment" />
                                 <p:calendar pattern="dd MMMM yyyy" navigator="true" id="dateOfFirstAppointment" value="#{employeeController.selected.dateOfFirstAppointment}" title="DateOfFirstAppointment" >
-                                    
+
                                 </p:calendar>
 
 
                                 <p:outputLabel value="Date of Current Designation:" for="dateOfCurrentDesignation" />
                                 <p:calendar pattern="dd MMMM yyyy" navigator="true"  id="dateOfCurrentDesignation" value="#{employeeController.selected.dateOfCurrentDesignation}" title="DateOfCurrentDesignation" >
-                                    
+
                                 </p:calendar>
 
                                 <p:outputLabel value="Date For Grade Two:" for="dateForGradeTwo" />
                                 <p:calendar pattern="dd MMMM yyyy" navigator="true"  id="dateForGradeTwo" value="#{employeeController.selected.dateForGradeTwo}" title="DateForGradeTwo" >
-                                    
+
                                 </p:calendar>
 
                                 <p:outputLabel value="Dete of Grade One:" for="deteOfGradeOne" />
                                 <p:calendar pattern="dd MMMM yyyy" navigator="true"  id="deteOfGradeOne" value="#{employeeController.selected.deteOfGradeOne}" title="DeteOfGradeOne" >
-                                    
+
                                 </p:calendar>
 
                                 <p:outputLabel value="Date of Special Grade:" for="dateOfSpecialGrade" />
                                 <p:calendar pattern="dd MMMM yyyy" navigator="true"  id="dateOfSpecialGrade" value="#{employeeController.selected.dateOfSpecialGrade}" title="DateOfSpecialGrade" >
-                                    
+
                                 </p:calendar>
 
                                 <p:outputLabel value="Date of Super Grade:" for="dateOfSuperGrade" />
                                 <p:calendar pattern="dd MMMM yyyy" navigator="true"  id="dateOfSuperGrade" value="#{employeeController.selected.dateOfSuperGrade}" title="DateOfSuperGrade" >
-                                    
+
                                 </p:calendar>
 
 
                                 <p:outputLabel value="EB1"  />
                                 <p:calendar pattern="dd MMMM yyyy" navigator="true"  value="#{employeeController.selected.eb1}"  >
-                                    
+
                                 </p:calendar>
 
 
                                 <p:outputLabel value="EB2"  />
                                 <p:calendar pattern="dd MMMM yyyy" navigator="true"  value="#{employeeController.selected.eb2}"  >
-                                    
+
                                 </p:calendar>
 
 
                                 <p:outputLabel value="EB3"  />
                                 <p:calendar pattern="dd MMMM yyyy" navigator="true"  value="#{employeeController.selected.eb3}"  >
-                                    
+
                                 </p:calendar>
 
 
@@ -308,17 +314,17 @@
 
                                 <p:outputLabel value="Date of Current Station:" for="dateOfCurrentStation" />
                                 <p:calendar pattern="dd MMMM yyyy" navigator="true"  id="dateOfCurrentStation" value="#{employeeController.selected.dateOfCurrentStation}" title="DateOfCurrentStation" >
-                                    
+
                                 </p:calendar>
 
                                 <p:outputLabel value="Date of Transfer From Current Station:" for="dateOfTransferFromCurrentStation" />
                                 <p:calendar pattern="dd MMMM yyyy" navigator="true"  id="dateOfTransferFromCurrentStation" value="#{employeeController.selected.dateOfTransferFromCurrentStation}" title="DateOfTransferFromCurrentStation" >
-                                    
+
                                 </p:calendar>
 
                                 <p:outputLabel value="Date of Transfer to Current Station:" for="dateOfTransferToCurrentStation" />
                                 <p:inputText id="dateOfTransferToCurrentStation" value="#{employeeController.selected.dateOfTransferToCurrentStation}" title="DateOfTransferToCurrentStation" >
-                                    
+
                                 </p:inputText>
 
 
